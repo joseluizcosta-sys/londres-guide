@@ -1,5 +1,5 @@
 /* Service Worker — Londres + Paris guia offline */
-const APP = "lp-app-v5";       // app shell (bump version to force update)
+const APP = "lp-app-v6";       // app shell (bump version to force update)
 const TILES = "lp-tiles-v1";   // map tiles (kept across app updates)
 
 const SHELL = [
@@ -60,9 +60,10 @@ self.addEventListener("fetch", e => {
   if (url.origin !== self.location.origin) return; // let other cross-origin pass
 
   // Roteiro content: network-first (fresh when online), cache fallback (offline).
+  // Use no-store so the browser HTTP cache can't serve a stale copy while online.
   if (FRESH.test(url.pathname)) {
     e.respondWith(
-      fetch(req).then(res => {
+      fetch(req, { cache: "no-store" }).then(res => {
         if (res && res.ok) { const c = res.clone(); caches.open(APP).then(k => k.put(req, c)); }
         return res;
       }).catch(() => caches.match(req).then(hit => hit || caches.match("index.html")))

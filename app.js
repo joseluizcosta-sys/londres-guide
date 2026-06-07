@@ -282,7 +282,40 @@ document.getElementById("dlBtn").onclick = async function () {
   setTimeout(() => { bar.style.display = "none"; fill.style.width = "0"; }, 2500);
 };
 
-/* ---------- Service worker ---------- */
+/* ---------- Service worker + auto-update ---------- */
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  let refreshing = false;
+  // When a new SW takes control, reload once to show the fresh version.
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (refreshing) return; refreshing = true; location.reload();
+  });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").then(reg => {
+      reg.update();
+      // Re-check for updates whenever the app comes back to the foreground
+      // (iOS resumes PWAs from memory without reloading).
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) reg.update();
+      });
+      // Also refresh the roteiro data in place when returning to foreground.
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) refreshData(); });
+    }).catch(() => {});
+  });
 }
+
+// Pull fresh data.js when online and re-render if the content changed,
+// so the app updates without a full reload even when iOS keeps it in memory.
+let lastDataHash = null;
+function hashStr(s) { let h = 0; for (let i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) | 0; } return h; }
+async function refreshData() {
+  try {
+    const res = await fetch("data.js?cb=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return;
+    const txt = await res.text();
+    const h = hashStr(txt);
+    if (lastDataHash === null) { lastDataHash = h; return; }
+    if (h !== lastDataHash) { lastDataHash = h; location.reload(); }
+  } catch (e) {}
+}
+// seed the hash so the first foreground check has a baseline
+refreshData();
