@@ -137,6 +137,16 @@
     border:none;cursor:pointer;text-decoration:underline;padding:0}
 
   .foot{text-align:center;color:var(--muted);font-size:11px;margin-top:18px}
+
+  /* My location */
+  .locbtn{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--accent);
+    font-weight:600;font-size:13px;padding:10px;border-radius:11px;cursor:pointer;margin-bottom:10px}
+  .locbtn:active{background:var(--card)}
+  .locbtn.busy{opacity:.6}
+  .me-dot{width:18px;height:18px;border-radius:50%;background:#2b8aff;border:3px solid #fff;
+    box-shadow:0 0 0 rgba(43,138,255,.5);animation:mepulse 1.8s infinite}
+  @keyframes mepulse{0%{box-shadow:0 0 0 0 rgba(43,138,255,.5)}
+    70%{box-shadow:0 0 0 14px rgba(43,138,255,0)}100%{box-shadow:0 0 0 0 rgba(43,138,255,0)}}
 </style>
 </head>
 <body>
@@ -166,6 +176,7 @@
       <select id="fCity"></select>
       <select id="fDay"></select>
     </div>
+    <button id="locBtn" class="locbtn">📍 Minha localização</button>
     <div id="map"></div>
     <div class="legend" id="legend"></div>
   </section>

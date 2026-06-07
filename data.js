@@ -31,8 +31,8 @@ const DAYS = [
     title: "Chegada a Londres",
     summary: "Chegada à tarde → descanso e ambientação.",
     places: [
-      { name: "Hospedagem (base)", type: "hotel", coords: null, area: "Londres",
-        desc: ["Check-in e base da viagem."] },
+      { name: "Hotel Londres — Park Plaza County Hall", type: "hotel", coords: [51.50166, -0.11713], area: "South Bank · 1 Addington St, SE1 7RY",
+        desc: ["Hotel base em Londres (check-in no Dia 1).", "South Bank, ao lado do London Eye e da Westminster Bridge; perto do metrô (Waterloo / Westminster) e do Tâmisa."] },
     ],
     tips: [
       "Passeio leve pelo bairro para se orientar.",

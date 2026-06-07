@@ -212,6 +212,31 @@ window.goMap = function (dayId, idx) {
 };
 initMap();
 
+/* ---------- My location (live GPS) ---------- */
+let meMarker, meCircle;
+const meIcon = L.divIcon({ className: "", iconSize: [18, 18], iconAnchor: [9, 9], html: '<div class="me-dot"></div>' });
+document.getElementById("locBtn").onclick = function () {
+  const btn = this;
+  if (!navigator.geolocation) { alert("Este aparelho não suporta geolocalização."); return; }
+  btn.classList.add("busy"); btn.textContent = "📍 Localizando…";
+  navigator.geolocation.getCurrentPosition(pos => {
+    const ll = [pos.coords.latitude, pos.coords.longitude];
+    const acc = pos.coords.accuracy || 30;
+    if (meMarker) meMarker.setLatLng(ll);
+    else meMarker = L.marker(ll, { icon: meIcon, zIndexOffset: 1000 }).addTo(map).bindPopup("📍 Você está aqui");
+    if (meCircle) meCircle.setLatLng(ll).setRadius(acc);
+    else meCircle = L.circle(ll, { radius: acc, color: "#2b8aff", weight: 1, fillColor: "#2b8aff", fillOpacity: 0.12 }).addTo(map);
+    map.setView(ll, 16);
+    btn.classList.remove("busy"); btn.textContent = "📍 Minha localização";
+  }, err => {
+    btn.classList.remove("busy"); btn.textContent = "📍 Minha localização";
+    const msg = err.code === 1
+      ? "Permissão de localização negada. Ative em Ajustes → Privacidade → Serviços de Localização → Safari (ou para este app)."
+      : "Não foi possível obter sua localização agora. Tente novamente ao ar livre.";
+    alert(msg);
+  }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 15000 });
+};
+
 /* ---------- Offline tile download ---------- */
 function lon2tile(lon, z) { return Math.floor((lon + 180) / 360 * Math.pow(2, z)); }
 function lat2tile(lat, z) {
