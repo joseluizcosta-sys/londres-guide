@@ -18,8 +18,6 @@
 const META = {
   title: "Londres + Paris",
   subtitle: "3 – 12 de Julho de 2026",
-  family: "JC + esposa + filho (12 anos)",
-  base: "Park Plaza County Hall (South Bank), Londres",
   updated: "07/06/2026"
 };
 
@@ -33,8 +31,8 @@ const DAYS = [
     title: "Chegada a Londres",
     summary: "Chegada à tarde → descanso e ambientação.",
     places: [
-      { name: "Park Plaza County Hall (base)", type: "hotel", coords: [51.50166, -0.11713], area: "South Bank · 1 Addington St, SE1 7RY",
-        desc: ["Check-in e base da viagem (grupo Radisson).", "South Bank, ao lado do London Eye e da Westminster Bridge — bem central; perto do Tâmisa e do metrô (Waterloo / Westminster)."] },
+      { name: "Hospedagem (base)", type: "hotel", coords: null, area: "Londres",
+        desc: ["Check-in e base da viagem."] },
     ],
     tips: [
       "Passeio leve pelo bairro para se orientar.",
@@ -313,11 +311,11 @@ const DAYS = [
 /* -------------------- INFO PRÁTICA -------------------- */
 const PRATICO = {
   custos: {
-    titulo: "💰 Estimativa de custos (família de 3)",
+    titulo: "💰 Estimativa de custos (3 pessoas)",
     itens: [
       ["Eurostar ida e volta (3 pessoas)", "£360–500"],
       ["Torre Eiffel (topo, 3 pessoas)", "~€84"],
-      ["Louvre (2 adultos — filho grátis)", "~€44"],
+      ["Louvre (2 adultos — menor grátis)", "~€44"],
       ["Tower of London", "~£85"],
       ["Cutty Sark", "~£45"],
       ["The Shard", "~£96"],
@@ -360,22 +358,10 @@ const PRATICO = {
       "Tomada: UK usa Tipo G (3 pinos) — leve adaptador universal."
     ]
   },
-  documentos: {
-    titulo: "📋 Documentos (status)",
-    itens: [
-      ["Passaporte JC", "✅ válido"],
-      ["Passaporte esposa", "✅ válido (vence out/2026 — ok p/ julho)"],
-      ["Passaporte filho", "✅ válido"],
-      ["ETA — JC / esposa / filho", "✅ aprovados"],
-      ["Seguro viagem", "☐ contratar"],
-      ["Hospedagem (Radisson Park)", "✅ reservado"],
-      ["Passagens aéreas", "✅ emitidas"]
-    ]
-  },
   checklist: {
     titulo: "✅ Checklist (pendentes)",
     itens: [
-      "Verificar passaporte individual do filho.",
+      "Verificar passaportes individuais (inclusive de menores).",
       "Solicitar férias formalmente ao RH (≥10 dias) e confirmar por escrito.",
       "Contratar seguro viagem p/ 3 (mín. USD 100.000 médica).",
       "Wise/Nomad para GBP + cartão de crédito internacional de backup.",

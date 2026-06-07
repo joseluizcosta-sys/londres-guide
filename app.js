@@ -18,8 +18,8 @@ const esc = s => String(s).replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", 
 
 /* ---------- header ---------- */
 document.getElementById("hTitle").textContent = META.title;
-document.getElementById("hSub").textContent = META.subtitle + " · " + META.family;
-document.getElementById("hMeta").textContent = "Base: " + META.base + " · atualizado " + META.updated;
+document.getElementById("hSub").textContent = META.subtitle + (META.family ? " · " + META.family : "");
+document.getElementById("hMeta").textContent = (META.base ? "Base: " + META.base + " · " : "") + "atualizado " + META.updated;
 document.getElementById("foot").textContent = "Roteiro atualizado em " + META.updated + " · guia offline";
 
 /* ---------- tabs ---------- */
@@ -95,7 +95,6 @@ function renderPratico() {
   root.innerHTML =
     kvSec(P.custos) +
     ulSec(P.lembretes) +
-    kvSec(P.documentos, "v") +
     ulSec(P.checklist) +
     kvSec(P.apps) +
     ulSec(P.dicas);
