@@ -3,8 +3,9 @@
 Liga o **projeto London** (texto) a este **app** (dados estruturados).
 
 - **Fonte (texto):** `~/Documents/Claude/Projects/London/roteiro-londres-paris-julho2026.md`
-- **Destino (estruturado):** `~/londres-guide/data.js`
+- **Destino (estruturado):** `~/Documents/Claude/Projects/London/londres-guide/data.js`
 - **Modo:** sob comando. O usuário edita o roteiro e diz **"sincroniza roteiro"**.
+- **Layout:** o app vive como subpasta `londres-guide/` dentro do projeto London (junto do roteiro/checklist).
 
 ## Procedimento (Claude executa ao receber "sincroniza roteiro")
 
@@ -24,7 +25,7 @@ Liga o **projeto London** (texto) a este **app** (dados estruturados).
 5. **Atualizar** `META.updated` para a data atual.
 6. **Validar** o `data.js` resultante como JS válido antes de publicar:
    `node --check data.js`  (ou `python3 -c "..."` se node indisponível). Abortar se inválido.
-7. **Publicar:** `cd ~/londres-guide && git add -A && git commit -m "Sincroniza roteiro (DD/MM)" && git push`.
+7. **Publicar:** `cd ~/Documents/Claude/Projects/London/londres-guide && git add -A && git commit -m "Sincroniza roteiro (DD/MM)" && git push`.
 8. **Reportar** ao usuário: o que mudou e quais lugares novos ficaram sem coordenada (para ele confirmar).
 
 ## Regras importantes
