@@ -19,7 +19,7 @@ const META = {
   title: "Londres + Paris",
   subtitle: "3 – 12 de Julho de 2026",
   family: "JC + esposa + filho (12 anos)",
-  base: "Hotel Radisson Park, Londres",
+  base: "Park Plaza County Hall (South Bank), Londres",
   updated: "07/06/2026"
 };
 
@@ -33,8 +33,8 @@ const DAYS = [
     title: "Chegada a Londres",
     summary: "Chegada à tarde → descanso e ambientação.",
     places: [
-      { name: "Hotel Radisson Park", type: "hotel", coords: null, area: "Londres",
-        desc: ["Check-in e base da viagem.", "⚠️ Confirme a localização/endereço exato do hotel e edite as coordenadas em data.js para o pino aparecer no mapa."] },
+      { name: "Park Plaza County Hall (base)", type: "hotel", coords: [51.50166, -0.11713], area: "South Bank · 1 Addington St, SE1 7RY",
+        desc: ["Check-in e base da viagem (grupo Radisson).", "South Bank, ao lado do London Eye e da Westminster Bridge — bem central; perto do Tâmisa e do metrô (Waterloo / Westminster)."] },
     ],
     tips: [
       "Passeio leve pelo bairro para se orientar.",
