@@ -1,0 +1,223 @@
+/* ===== Londres + Paris — guia offline ===== */
+"use strict";
+
+const TYPE = {
+  museu:       { c: "var(--t-museu)",       e: "🏛️", l: "Museu" },
+  atracao:     { c: "var(--t-atracao)",     e: "🎡", l: "Atração" },
+  igreja:      { c: "var(--t-igreja)",      e: "⛪", l: "Igreja" },
+  parque:      { c: "var(--t-parque)",      e: "🌳", l: "Parque" },
+  mercado:     { c: "var(--t-mercado)",     e: "🛒", l: "Mercado" },
+  restaurante: { c: "var(--t-restaurante)", e: "🍽️", l: "Comer" },
+  loja:        { c: "var(--t-loja)",        e: "🛍️", l: "Loja" },
+  mirante:     { c: "var(--t-mirante)",     e: "🌆", l: "Mirante" },
+  transporte:  { c: "var(--t-transporte)",  e: "🚇", l: "Transporte" },
+  hotel:       { c: "var(--t-hotel)",       e: "🏨", l: "Hotel" }
+};
+const tcol = t => `var(--t-${t})`;
+const esc = s => String(s).replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+
+/* ---------- header ---------- */
+document.getElementById("hTitle").textContent = META.title;
+document.getElementById("hSub").textContent = META.subtitle + " · " + META.family;
+document.getElementById("hMeta").textContent = "Base: " + META.base + " · atualizado " + META.updated;
+document.getElementById("foot").textContent = "Roteiro atualizado em " + META.updated + " · guia offline";
+
+/* ---------- tabs ---------- */
+document.querySelectorAll("nav button").forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll("nav button").forEach(x => x.classList.remove("active"));
+    document.querySelectorAll(".view").forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    document.getElementById(b.dataset.v).classList.add("active");
+    if (b.dataset.v === "mapa" && map) setTimeout(() => { map.invalidateSize(); drawMarkers(); }, 80);
+  };
+});
+
+/* ---------- render: Roteiro ---------- */
+function descHtml(d) {
+  if (!d) return "";
+  if (Array.isArray(d)) return `<ul class="desc">${d.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
+  return `<div class="desc solo">${esc(d)}</div>`;
+}
+function placeHtml(p, dayId, idx) {
+  const t = TYPE[p.type] || TYPE.atracao;
+  const hasCoord = Array.isArray(p.coords);
+  const meta = [t.l, p.area].filter(Boolean).join(" · ");
+  let hl = "";
+  if (p.highlights && p.highlights.length) {
+    hl = `<div class="hl"><div class="hl-t">Não perca</div>` +
+      p.highlights.map(h => `<div class="hl-i"><span class="h">${esc(h.name)}</span>` +
+        (h.where ? `<span class="w">${esc(h.where)}</span>` : "") +
+        (h.note ? `<span class="n">${esc(h.note)}</span>` : "") + `</div>`).join("") + `</div>`;
+  }
+  return `<div class="place">
+    <div class="place-h">
+      <div class="pin" style="background:${tcol(p.type)}22;color:${tcol(p.type)}">${t.e}</div>
+      <div class="place-n">
+        <div class="nm">${esc(p.name)}</div>
+        <div class="meta">${esc(meta)}</div>
+        ${p.price ? `<div class="price">${esc(p.price)}</div>` : ""}
+      </div>
+      ${hasCoord ? `<button class="mapbtn" onclick="goMap(${dayId},${idx})">Mapa</button>` : ""}
+    </div>
+    ${descHtml(p.desc)}
+    ${hl}
+  </div>`;
+}
+function renderDays() {
+  const root = document.getElementById("dias");
+  root.innerHTML = `<div class="aviso">${esc(AVISO)}</div>` + DAYS.map(d => `
+    <div class="day" id="day-${d.id}">
+      <div class="day-head" onclick="document.getElementById('day-${d.id}').classList.toggle('open')">
+        <div class="day-badge"><div class="d">${esc(d.date)}</div><div class="w">${esc(d.weekday)}</div></div>
+        <div class="day-emoji">${d.emoji}</div>
+        <div class="day-tt"><div class="t">${esc(d.title)}</div><div class="s">${esc(d.summary)}</div></div>
+        <div class="day-city">${esc(d.city)}</div>
+        <div class="chev">▶</div>
+      </div>
+      <div class="day-body">
+        ${d.places.map((p, i) => placeHtml(p, d.id, i)).join("")}
+        ${d.tips && d.tips.length ? `<ul class="tips">${d.tips.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
+      </div>
+    </div>`).join("");
+}
+renderDays();
+document.getElementById("day-1").classList.add("open");
+
+/* ---------- render: Prático ---------- */
+function renderPratico() {
+  const P = PRATICO, root = document.getElementById("pratico");
+  const kvSec = (s, vClass) => `<div class="sec"><h3>${esc(s.titulo)}</h3>` +
+    s.itens.map(([k, v]) => `<div class="kv"><span>${esc(k)}</span><span class="${vClass || "v"}">${esc(v)}</span></div>`).join("") +
+    (s.notas ? s.notas.map(n => `<div class="note">${esc(n)}</div>`).join("") : "") + `</div>`;
+  const ulSec = s => `<div class="sec"><h3>${esc(s.titulo)}</h3><ul>` +
+    s.itens.map(i => `<li>${esc(i)}</li>`).join("") + `</ul></div>`;
+  root.innerHTML =
+    kvSec(P.custos) +
+    ulSec(P.lembretes) +
+    kvSec(P.documentos, "v") +
+    ulSec(P.checklist) +
+    kvSec(P.apps) +
+    ulSec(P.dicas);
+}
+renderPratico();
+
+/* ---------- Map ---------- */
+let map, layer, allMarkers = [];
+const TILE = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+
+function flatPlaces() {
+  const out = [];
+  DAYS.forEach(d => d.places.forEach((p, i) => {
+    if (Array.isArray(p.coords)) out.push({ ...p, dayId: d.id, idx: i, dayDate: d.date, city: d.city });
+  }));
+  return out;
+}
+function markerIcon(type) {
+  const t = TYPE[type] || TYPE.atracao;
+  return L.divIcon({
+    className: "", iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -14],
+    html: `<div style="width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(45deg);
+      background:${tcol(type)};border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.5);
+      display:flex;align-items:center;justify-content:center">
+      <span style="transform:rotate(-45deg);font-size:14px">${t.e}</span></div>`
+  });
+}
+function initMap() {
+  map = L.map("map", { zoomControl: true, attributionControl: true }).setView([51.509, -0.126], 12);
+  L.tileLayer(TILE, { maxZoom: 18, attribution: "© OpenStreetMap", crossOrigin: true }).addTo(map);
+  layer = L.layerGroup().addTo(map);
+  buildFilters();
+  drawMarkers();
+}
+function buildFilters() {
+  const cities = ["Todos", ...new Set(DAYS.map(d => d.city))];
+  document.getElementById("fCity").innerHTML = cities.map(c => `<option value="${c}">${c === "Todos" ? "🌍 Todas as cidades" : c}</option>`).join("");
+  document.getElementById("fDay").innerHTML = `<option value="all">📅 Todos os dias</option>` +
+    DAYS.map(d => `<option value="${d.id}">${d.date} · ${d.title}</option>`).join("");
+  document.getElementById("fCity").onchange = drawMarkers;
+  document.getElementById("fDay").onchange = drawMarkers;
+  // legend
+  document.getElementById("legend").innerHTML = Object.entries(TYPE)
+    .map(([k, v]) => `<span><i style="background:${tcol(k)}"></i>${v.l}</span>`).join("");
+}
+function drawMarkers() {
+  const city = document.getElementById("fCity").value;
+  const day = document.getElementById("fDay").value;
+  layer.clearLayers(); allMarkers = [];
+  const pts = flatPlaces().filter(p =>
+    (city === "Todos" || p.city === city) && (day === "all" || String(p.dayId) === day));
+  const bounds = [];
+  pts.forEach(p => {
+    const m = L.marker(p.coords, { icon: markerIcon(p.type) }).addTo(layer);
+    const desc = Array.isArray(p.desc) ? p.desc[0] : (p.desc || "");
+    m.bindPopup(`<b>${esc(p.name)}</b><div class="pop-meta">${esc((TYPE[p.type] || {}).l || "")} · ${esc(p.dayDate)} · ${esc(p.area || p.city)}</div>` +
+      (p.price ? `<div class="pop-meta">💷 ${esc(p.price)}</div>` : "") +
+      (desc ? `<div style="margin-top:5px">${esc(desc)}</div>` : ""));
+    m.placeKey = p.dayId + "-" + p.idx;
+    allMarkers.push(m); bounds.push(p.coords);
+  });
+  if (bounds.length) map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+}
+window.goMap = function (dayId, idx) {
+  document.querySelector('nav button[data-v="mapa"]').click();
+  const d = DAYS.find(x => x.id === dayId);
+  document.getElementById("fCity").value = "Todos";
+  document.getElementById("fDay").value = String(dayId);
+  drawMarkers();
+  setTimeout(() => {
+    const m = allMarkers.find(x => x.placeKey === dayId + "-" + idx);
+    if (m) { map.setView(m.getLatLng(), 16); m.openPopup(); }
+  }, 200);
+};
+initMap();
+
+/* ---------- Offline tile download ---------- */
+function lon2tile(lon, z) { return Math.floor((lon + 180) / 360 * Math.pow(2, z)); }
+function lat2tile(lat, z) {
+  const r = lat * Math.PI / 180;
+  return Math.floor((1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * Math.pow(2, z));
+}
+function tileSet() {
+  // dedupe tiles across all locations. zoom -> radius (tiles around center)
+  const plan = [[12, 1], [13, 1], [14, 2], [15, 2], [16, 1]];
+  const set = new Set();
+  flatPlaces().forEach(p => {
+    const [lat, lon] = p.coords;
+    plan.forEach(([z, r]) => {
+      const cx = lon2tile(lon, z), cy = lat2tile(lat, z);
+      for (let x = cx - r; x <= cx + r; x++)
+        for (let y = cy - r; y <= cy + r; y++)
+          set.add(z + "/" + x + "/" + y);
+    });
+  });
+  return [...set];
+}
+document.getElementById("dlBtn").onclick = async function () {
+  const btn = this, info = document.getElementById("dlInfo"), bar = document.getElementById("dlBar"), fill = bar.querySelector("i");
+  const tiles = tileSet();
+  btn.disabled = true; bar.style.display = "block";
+  let done = 0, fail = 0;
+  const total = tiles.length;
+  info.textContent = `Baixando ${total} blocos de mapa…`;
+  // throttle: small batches, gentle on the tile server
+  const batch = 6;
+  for (let i = 0; i < tiles.length; i += batch) {
+    await Promise.all(tiles.slice(i, i + batch).map(async t => {
+      try { await fetch("https://tile.openstreetmap.org/" + t + ".png", { mode: "cors", cache: "force-cache" }); }
+      catch (e) { fail++; }
+      done++;
+    }));
+    fill.style.width = Math.round(done / total * 100) + "%";
+    info.textContent = `Baixando mapas… ${done}/${total}`;
+    await new Promise(r => setTimeout(r, 120));
+  }
+  info.textContent = `✅ Mapas salvos (${done - fail}/${total}). Já funciona offline.` + (fail ? ` ${fail} falharam — tente de novo no wi-fi.` : "");
+  btn.disabled = false;
+  setTimeout(() => { bar.style.display = "none"; fill.style.width = "0"; }, 2500);
+};
+
+/* ---------- Service worker ---------- */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}

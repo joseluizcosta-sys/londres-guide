@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0e1116">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Londres + Paris">
+<title>Londres + Paris — Guia</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<style>
+  :root{
+    --bg:#0e1116; --bg2:#161b22; --card:#1b2230; --line:#262d3a;
+    --txt:#e9eef5; --muted:#9aa6b6; --accent:#5b8cff; --accent2:#ff7a59;
+    --gold:#ffc857; --green:#4caf82;
+    --t-museu:#6c8cff; --t-atracao:#ff7a59; --t-igreja:#b07cff; --t-parque:#4caf82;
+    --t-mercado:#f5a623; --t-restaurante:#ff5d8f; --t-loja:#00bcd4;
+    --t-mirante:#ffc857; --t-transporte:#9aa0a6; --t-hotel:#ff4d6d;
+    --safe-top:env(safe-area-inset-top,0px); --safe-bot:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+    font-size:15px;line-height:1.45;overscroll-behavior-y:none}
+  a{color:var(--accent);text-decoration:none}
+
+  header{position:sticky;top:0;z-index:600;background:rgba(14,17,22,.92);
+    backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line);
+    padding:calc(var(--safe-top) + 10px) 16px 8px}
+  .h-title{font-size:18px;font-weight:700;letter-spacing:.2px}
+  .h-sub{font-size:12px;color:var(--muted);margin-top:1px}
+  .h-meta{font-size:11px;color:var(--muted);margin-top:2px}
+
+  nav{display:flex;gap:6px;margin-top:10px}
+  nav button{flex:1;background:var(--bg2);border:1px solid var(--line);color:var(--muted);
+    padding:9px 4px;border-radius:11px;font-size:13px;font-weight:600;cursor:pointer}
+  nav button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  main{padding:14px 14px calc(28px + var(--safe-bot))}
+  .view{display:none} .view.active{display:block}
+
+  .aviso{background:linear-gradient(135deg,#3a2a12,#2a1f10);border:1px solid #5a4420;
+    color:#ffdda3;padding:11px 13px;border-radius:13px;font-size:13px;margin-bottom:14px}
+
+  /* Day cards */
+  .day{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    margin-bottom:12px;overflow:hidden}
+  .day-head{display:flex;align-items:center;gap:11px;padding:14px;cursor:pointer}
+  .day-emoji{font-size:24px;line-height:1}
+  .day-badge{min-width:42px;text-align:center;background:var(--bg2);border:1px solid var(--line);
+    border-radius:10px;padding:5px 6px}
+  .day-badge .d{font-size:13px;font-weight:700} .day-badge .w{font-size:9px;color:var(--muted)}
+  .day-tt{flex:1;min-width:0}
+  .day-tt .t{font-size:15px;font-weight:700}
+  .day-tt .s{font-size:12px;color:var(--muted);margin-top:1px}
+  .day-city{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;
+    background:var(--bg2);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+  .chev{color:var(--muted);transition:transform .2s;font-size:13px}
+  .day.open .chev{transform:rotate(90deg)}
+  .day-body{display:none;padding:0 14px 8px}
+  .day.open .day-body{display:block}
+
+  .place{border-top:1px solid var(--line);padding:12px 0}
+  .place:first-child{border-top:none}
+  .place-h{display:flex;align-items:flex-start;gap:9px}
+  .pin{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;
+    justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px}
+  .place-n{flex:1;min-width:0}
+  .place-n .nm{font-weight:700;font-size:14.5px}
+  .place-n .meta{font-size:11.5px;color:var(--muted);margin-top:1px}
+  .price{display:inline-block;font-size:11px;color:#ffd9a0;background:#3a2a12;
+    border:1px solid #5a4420;padding:1px 7px;border-radius:8px;margin-top:5px}
+  .mapbtn{flex-shrink:0;font-size:11px;color:var(--accent);background:var(--bg2);
+    border:1px solid var(--line);padding:5px 9px;border-radius:9px;cursor:pointer}
+  .desc{margin:8px 0 0;padding:0}
+  .desc li{margin:4px 0 4px 18px;font-size:13px;color:#cfd8e3}
+  .desc.solo{list-style:none;margin-left:0;font-size:13px;color:#cfd8e3}
+  .hl{margin-top:9px;background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:9px 11px}
+  .hl-t{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+  .hl-i{margin:7px 0;font-size:13px}
+  .hl-i .h{font-weight:700}
+  .hl-i .w{font-size:11px;color:var(--accent);margin-left:4px}
+  .hl-i .n{color:#bcc6d2;font-size:12.5px;display:block;margin-top:1px}
+  .tips{margin-top:6px;background:#11261c;border:1px solid #24402f;border-radius:11px;padding:9px 11px}
+  .tips li{margin:5px 0 5px 18px;font-size:13px;color:#bfe6cf}
+
+  /* Map */
+  #map{height:calc(100vh - 250px);min-height:340px;border-radius:14px;border:1px solid var(--line);overflow:hidden}
+  .map-ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .map-ctrls select{flex:1;background:var(--bg2);color:var(--txt);border:1px solid var(--line);
+    border-radius:10px;padding:9px;font-size:13px}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px;font-size:11px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .leaflet-popup-content{margin:11px 13px;font-size:13px}
+  .leaflet-popup-content b{font-size:14px}
+  .pop-meta{color:#666;font-size:11px;margin-top:3px}
+
+  .dlbar{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 13px;margin-bottom:12px}
+  .dlbar .row{display:flex;align-items:center;gap:10px}
+  .dlbar button{background:var(--accent);border:none;color:#fff;font-weight:700;font-size:13px;
+    padding:9px 14px;border-radius:10px;cursor:pointer;white-space:nowrap}
+  .dlbar button:disabled{opacity:.55}
+  .dlbar .info{font-size:12px;color:var(--muted)}
+  .bar{height:6px;background:var(--bg2);border-radius:6px;margin-top:10px;overflow:hidden;display:none}
+  .bar i{display:block;height:100%;width:0;background:var(--green);transition:width .2s}
+
+  /* Pratico */
+  .sec{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+  .sec h3{margin:0 0 10px;font-size:15px}
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+  .kv:first-of-type{border-top:none}
+  .kv .v{color:var(--gold);text-align:right;white-space:nowrap}
+  .sec ul{margin:0;padding-left:18px} .sec ul li{margin:6px 0;font-size:13px;color:#cfd8e3}
+  .note{font-size:12px;color:var(--muted);margin-top:9px;font-style:italic}
+
+  .foot{text-align:center;color:var(--muted);font-size:11px;margin-top:18px}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-title" id="hTitle"></div>
+  <div class="h-sub" id="hSub"></div>
+  <div class="h-meta" id="hMeta"></div>
+  <nav>
+    <button data-v="dias" class="active">Roteiro</button>
+    <button data-v="mapa">Mapa</button>
+    <button data-v="pratico">Prático</button>
+  </nav>
+</header>
+
+<main>
+  <section id="dias" class="view active"></section>
+
+  <section id="mapa" class="view">
+    <div class="dlbar">
+      <div class="row">
+        <button id="dlBtn">⬇️ Baixar mapas</button>
+        <div class="info" id="dlInfo">Toque para gravar os mapas no aparelho (use no wi-fi). Depois funcionam offline.</div>
+      </div>
+      <div class="bar" id="dlBar"><i></i></div>
+    </div>
+    <div class="map-ctrls">
+      <select id="fCity"></select>
+      <select id="fDay"></select>
+    </div>
+    <div id="map"></div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section id="pratico" class="view"></section>
+
+  <div class="foot" id="foot"></div>
+</main>
+
+<script src="vendor/leaflet.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
