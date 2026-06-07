@@ -359,7 +359,7 @@ const PRATICO = {
     ]
   },
   checklist: {
-    titulo: "✅ Checklist (pendentes)",
+    titulo: "✅ Checklist",
     itens: [
       "Verificar passaportes individuais (inclusive de menores).",
       "Solicitar férias formalmente ao RH (≥10 dias) e confirmar por escrito.",

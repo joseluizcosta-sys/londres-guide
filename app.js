@@ -85,6 +85,11 @@ renderDays();
 document.getElementById("day-1").classList.add("open");
 
 /* ---------- render: Prático ---------- */
+const CK_KEY = "lp_checklist_v1";
+const loadChecks = () => { try { return JSON.parse(localStorage.getItem(CK_KEY)) || {}; } catch (e) { return {}; } };
+const saveChecks = o => { try { localStorage.setItem(CK_KEY, JSON.stringify(o)); } catch (e) {} };
+const escAttr = s => esc(s).replace(/"/g, "&quot;");
+
 function renderPratico() {
   const P = PRATICO, root = document.getElementById("pratico");
   const kvSec = (s, vClass) => `<div class="sec"><h3>${esc(s.titulo)}</h3>` +
@@ -92,12 +97,45 @@ function renderPratico() {
     (s.notas ? s.notas.map(n => `<div class="note">${esc(n)}</div>`).join("") : "") + `</div>`;
   const ulSec = s => `<div class="sec"><h3>${esc(s.titulo)}</h3><ul>` +
     s.itens.map(i => `<li>${esc(i)}</li>`).join("") + `</ul></div>`;
+  const ckSec = s => {
+    const saved = loadChecks();
+    return `<div class="sec"><h3>${esc(s.titulo)}<span class="ck-count" id="ckCount"></span></h3>
+      <div class="cklist">` +
+      s.itens.map(it => {
+        const on = !!saved[it];
+        return `<label class="ckitem${on ? " done" : ""}">
+          <input type="checkbox" data-key="${escAttr(it)}"${on ? " checked" : ""}>
+          <span class="box"></span><span class="lbl">${esc(it)}</span></label>`;
+      }).join("") +
+      `</div><button class="ck-reset" id="ckReset">Limpar marcações</button></div>`;
+  };
   root.innerHTML =
     kvSec(P.custos) +
     ulSec(P.lembretes) +
-    ulSec(P.checklist) +
+    ckSec(P.checklist) +
     kvSec(P.apps) +
     ulSec(P.dicas);
+  wireChecklist();
+}
+function updateCkCount() {
+  const total = document.querySelectorAll("#pratico .ckitem").length;
+  const done = document.querySelectorAll("#pratico .ckitem input:checked").length;
+  const el = document.getElementById("ckCount");
+  if (el) el.textContent = total ? ` ${done}/${total}` : "";
+}
+function wireChecklist() {
+  document.querySelectorAll("#pratico .ckitem input").forEach(inp => {
+    inp.addEventListener("change", () => {
+      const c = loadChecks();
+      if (inp.checked) c[inp.dataset.key] = 1; else delete c[inp.dataset.key];
+      saveChecks(c);
+      inp.closest(".ckitem").classList.toggle("done", inp.checked);
+      updateCkCount();
+    });
+  });
+  const reset = document.getElementById("ckReset");
+  if (reset) reset.onclick = () => { saveChecks({}); renderPratico(); };
+  updateCkCount();
 }
 renderPratico();
 
