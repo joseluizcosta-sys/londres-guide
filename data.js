@@ -361,6 +361,7 @@ const PRATICO = {
   checklist: {
     titulo: "✅ Checklist",
     itens: [
+      "Reservar hotel em Paris (7–9 jul).",
       "Verificar passaportes individuais (inclusive de menores).",
       "Solicitar férias formalmente ao RH (≥10 dias) e confirmar por escrito.",
       "Contratar seguro viagem p/ 3 (mín. USD 100.000 médica).",
