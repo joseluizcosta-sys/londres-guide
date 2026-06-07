@@ -1,5 +1,5 @@
 /* Service Worker — Londres + Paris guia offline */
-const APP = "lp-app-v2";       // app shell (bump version to force update)
+const APP = "lp-app-v3";       // app shell (bump version to force update)
 const TILES = "lp-tiles-v1";   // map tiles (kept across app updates)
 
 const SHELL = [
@@ -10,6 +10,9 @@ const SHELL = [
   "manifest.webmanifest",
   "vendor/leaflet.css",
   "vendor/leaflet.js",
+  "vendor/markercluster.css",
+  "vendor/markercluster.default.css",
+  "vendor/leaflet.markercluster.js",
   "vendor/images/marker-icon.png",
   "vendor/images/marker-icon-2x.png",
   "vendor/images/marker-shadow.png",

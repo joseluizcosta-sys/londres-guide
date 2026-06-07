@@ -126,7 +126,10 @@ function markerIcon(type) {
 function initMap() {
   map = L.map("map", { zoomControl: true, attributionControl: true }).setView([51.509, -0.126], 12);
   L.tileLayer(TILE, { maxZoom: 18, attribution: "© OpenStreetMap", crossOrigin: true }).addTo(map);
-  layer = L.layerGroup().addTo(map);
+  layer = L.markerClusterGroup({
+    maxClusterRadius: 45, spiderfyOnMaxZoom: true, showCoverageOnHover: false,
+    disableClusteringAtZoom: 16, chunkedLoading: true
+  }).addTo(map);
   buildFilters();
   drawMarkers();
 }
