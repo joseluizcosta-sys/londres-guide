@@ -18,7 +18,7 @@
 const META = {
   title: "Londres + Paris",
   subtitle: "3 – 12 de Julho de 2026",
-  updated: "07/06/2026"
+  updated: "09/06/2026 — V3: Paris 3 dias (Torre qua 10h · Louvre qui 10h30) · hotel Novotel Vaugirard · Camden+Bandai no domingo"
 };
 
 // Aviso fixo do roteiro
@@ -27,7 +27,7 @@ const AVISO = "⚠️ Reserve com antecedência: Torre Eiffel, Louvre e Tower of
 const DAYS = [
   /* ---------------------- DIA 1 ---------------------- */
   {
-    id: 1, date: "3 jul", weekday: "Quinta", city: "Londres", emoji: "✈️",
+    id: 1, date: "3 jul", weekday: "Sexta", city: "Londres", emoji: "✈️",
     title: "Chegada a Londres",
     summary: "Chegada à tarde → descanso e ambientação.",
     places: [
@@ -44,7 +44,7 @@ const DAYS = [
 
   /* ---------------------- DIA 2 ---------------------- */
   {
-    id: 2, date: "4 jul", weekday: "Sexta", city: "Londres", emoji: "🏛️",
+    id: 2, date: "4 jul", weekday: "Sábado", city: "Londres", emoji: "🏛️",
     title: "British Museum + West End",
     summary: "Manhã no British Museum, tarde em Covent Garden e West End, jantar em Chinatown.",
     places: [
@@ -92,7 +92,7 @@ const DAYS = [
 
   /* ---------------------- DIA 3 ---------------------- */
   {
-    id: 3, date: "5 jul", weekday: "Sábado", city: "Londres", emoji: "🦕",
+    id: 3, date: "5 jul", weekday: "Domingo", city: "Londres", emoji: "🦕",
     title: "South Kensington — Ciência e Natureza",
     summary: "Natural History Museum de manhã, Science Museum à tarde, Hyde Park no fim do dia.",
     places: [
@@ -130,7 +130,7 @@ const DAYS = [
 
   /* ---------------------- DIA 4 ---------------------- */
   {
-    id: 4, date: "6 jul", weekday: "Domingo", city: "Londres", emoji: "👑",
+    id: 4, date: "6 jul", weekday: "Segunda", city: "Londres", emoji: "👑",
     title: "Tower of London + South Bank",
     summary: "Tower of London de manhã, almoço no Borough Market, caminhada pela South Bank.",
     places: [
@@ -157,88 +157,93 @@ const DAYS = [
 
   /* ---------------------- DIA 5 ---------------------- */
   {
-    id: 5, date: "7 jul", weekday: "Segunda", city: "Paris", emoji: "🚄",
-    title: "Eurostar → Paris | Île de la Cité",
-    summary: "Eurostar de manhã, tarde na Île de la Cité, Shakespeare & Company ao entardecer.",
+    id: 5, date: "7 jul", weekday: "Terça", city: "Paris", emoji: "🚄",
+    title: "Eurostar → Paris | Quartier Latin + Tuileries",
+    summary: "Chegada ~meio-dia, tarde no Quartier Latin (Au Plat d'Étain, Notre-Dame, Shakespeare & Co.), noite na Fête des Tuileries.",
     places: [
       { name: "London St Pancras International", type: "transporte", coords: [51.5320, -0.1263], area: "Londres",
         desc: ["Eurostar saindo de St Pancras — ~2h15 até Paris Gare du Nord.",
-          "Pegue o trem cedo (7h–8h30) para aproveitar o dia em Paris.",
+          "Saindo ~9h–9h30, chegada a Paris ~meio-dia (1h de fuso a mais em Paris).",
           "Reserve antes em eurostar.com (~£60–100/pessoa ida; mais barato quanto antes).",
           "Passaporte obrigatório. ETA não vale para a França — brasileiros não precisam de visto (90 dias Schengen)."] },
       { name: "Paris Gare du Nord", type: "transporte", coords: [48.8809, 2.3553], area: "Paris",
-        desc: "Chegada em Paris. Deixe as malas no hotel ou no luggage storage da estação." },
+        desc: "Chegada ~meio-dia. Ao hotel: L4 até Montparnasse-Bienvenüe → troca L12 → Vaugirard (~30 min)." },
+      { name: "Novotel Paris Vaugirard Montparnasse", type: "hotel", coords: [48.8411, 2.3033], area: "257 rue de Vaugirard (15e) · M Vaugirard (L12)",
+        desc: ["Hotel base em Paris — 2 noites (terça 7 → quinta 9).", "Deixem as mochilas e façam check-in se o quarto estiver pronto.", "A L12 conecta direto: Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre)."] },
+      { name: "Au Plat d'Étain", type: "loja", coords: [48.8527, 2.3340], area: "Saint-Germain (Paris 6e)",
+        desc: ["16, rue Guisarde · Ter–Sáb 10h30–17h ⏰ cheguem antes das 17h.",
+          "Loja de figurines de coleção desde 1775 — soldados históricos, Astérix & Obélix, pintados à mão.",
+          "Ótimo para o filho de 12 anos; peças únicas fora do circuito de souvenir."] },
       { name: "Notre-Dame de Paris", type: "igreja", coords: [48.8530, 2.3499], area: "Île de la Cité",
         price: "Gratuito (reserva online recomendada)", desc: ["Reaberta em dez/2024 após restauração. Exterior impressionante, interior restaurado."] },
-      { name: "Sainte-Chapelle", type: "igreja", coords: [48.8554, 2.3450], area: "Île de la Cité",
-        price: "~€13", desc: "Vidraças medievais incríveis." },
       { name: "Pont Neuf", type: "atracao", coords: [48.8566, 2.3412], area: "Île de la Cité",
-        desc: "A ponte mais antiga de Paris; caminhe pela ilha." },
-      { name: "Place Dauphine", type: "atracao", coords: [48.8565, 2.3430], area: "Île de la Cité",
-        desc: "Praça tranquila e charmosa na ponta da ilha." },
+        desc: "A ponte mais antiga de Paris; caminhe pela ilha (Place Dauphine)." },
       { name: "Shakespeare & Company", type: "loja", coords: [48.8525, 2.3470], area: "frente a Notre-Dame",
-        desc: ["Livraria mais famosa do mundo, à beira do Sena.", "Livros novos e usados, gatos que moram na loja, história literária rica.", "Perfeito para o filho despertar interesse em leitura e história."] },
-      { name: "Saint-Germain-des-Prés", type: "restaurante", coords: [48.8540, 2.3340], area: "rive gauche",
-        desc: "Jantar: brasseries tradicionais, crêpes, bistrôs." }
+        desc: ["Livraria mais famosa do mundo, à beira do Sena.", "Livros novos e usados, gatos que moram na loja, história literária rica."] },
+      { name: "Grande Mosquée de Paris", type: "atracao", coords: [48.8420, 2.3550], area: "Quartier Latin (5e)",
+        desc: ["Passar por fora — ~20 min a pé de Shakespeare & Co., ao lado do Jardin des Plantes.", "Arquitetura hispano-mourisca: azulejos, minarete de 33 m, pátios de inspiração da Alhambra.", "💡 Opcional barato: salão de chá com chá de menta + doces árabes."] },
+      { name: "Fête des Tuileries", type: "parque", coords: [48.8634, 2.3275], area: "Jardin des Tuileries (1er)",
+        price: "Entrada grátis (paga só os brinquedos)", desc: ["Parque de diversões de verão (20/jun–23/ago 2026, todos os dias 11h–23h30).", "A 'noite mágica' do filho: roda-gigante com vista de Paris ao entardecer.", "Escurece ~21h30 no verão — dá tempo de jantar e curtir a roda iluminada."] }
     ],
-    tips: []
+    tips: ["Volta ao hotel: de Concorde, L12 direto até Vaugirard.", "Au Plat d'Étain fecha às 17h — encaixe com folga."]
   },
 
   /* ---------------------- DIA 6 ---------------------- */
   {
-    id: 6, date: "8 jul", weekday: "Terça", city: "Paris", emoji: "🖼️",
-    title: "Louvre + Montmartre",
-    summary: "Manhã no Louvre, tarde em Montmartre e Sacré-Cœur.",
+    id: 6, date: "8 jul", weekday: "Quarta", city: "Paris", emoji: "🗼",
+    title: "Torre Eiffel + Arco do Triunfo + Montmartre",
+    summary: "Invalides e Rodin por fora, Torre Eiffel às 10h, Arco do Triunfo e Montmartre ao pôr do sol.",
     places: [
-      { name: "Museu do Louvre", type: "museu", coords: [48.8606, 2.3376], area: "Paris 1er",
-        price: "~€22 adulto / grátis < 18 anos — compre online com horário", desc: ["Reserve 3–4h. Filas são enormes.",
-          "Dica: entre pela pirâmide menor (Carrousel du Louvre) — menos fila.",
-          "Estratégia: foco em arte famosa e pintura europeia — complementa o British sem repetir.",
-          "Pular: antiguidades egípcias e esculturas gregas menores (já vistas no British)."],
-        highlights: [
-          { name: "Vênus de Milo e Vitória de Samotrácia", note: "Início obrigatório; visualmente impactantes, não exigem explicação." },
-          { name: "Mona Lisa", note: "Vale pela experiência do fenômeno (a sala lotada é um espetáculo sociológico), não pelo quadro em si (menor do que parece)." },
-          { name: "Castelo medieval no subsolo", where: "Sully, piso -1", note: "Fundações da fortaleza do séc. XII, visíveis in loco. Concreto e inesperado." },
-          { name: "Apartamentos de Napoleão III", where: "ala Richelieu", note: "Luxo absoluto, parece cenário de filme. Funciona muito bem para adolescentes." },
-          { name: "Grande Galerie de pintura", note: "Escolha 3–4 telas com história (Caravaggio, Vermeer, Bodas de Caná de Veronese — enorme) em vez de percorrer tudo." },
-          { name: "Coleção islâmica", where: "ala Richelieu, 1º andar", note: "Pouco visitada, arquitetonicamente linda. Bom contraponto." }
-        ] },
-      { name: "Le Marais (Rue des Rosiers)", type: "restaurante", coords: [48.8571, 2.3590], area: "Paris 4e",
-        desc: "Almoço: falafel famoso e barato. Ou boulangerie com sanduíche e sobremesa." },
-      { name: "Les Halles", type: "restaurante", coords: [48.8626, 2.3450], area: "Paris 1er",
-        desc: "Alternativa de almoço, próximo ao Louvre." },
-      { name: "Au Plat d'Étain", type: "loja", coords: [48.8527, 2.3340], area: "Saint-Germain (Paris 6e)",
-        desc: ["16, rue Guisarde · Ter–Sáb 10h30–17h · ~15 min a pé do Louvre.",
-          "Loja de figurines de coleção desde 1775 — soldados históricos, personagens de BD (Astérix & Obélix), pintados à mão.",
-          "Ótimo para o filho de 12 anos; peças únicas fora do circuito de souvenir.",
-          "Dica: confira antes na boutique oficial Astérix o que há em edição limitada para comparar."] },
+      { name: "Musée Rodin", type: "museu", coords: [48.8553, 2.3158], area: "Paris 7e",
+        price: "Só jardim ~€5 (grátis < 18) — ou ver por fora", desc: ["Só por fora: dá para ver 'O Pensador' e o jardim pela grade.", "Do Novotel: L12 direto até Solférino (sem troca) → ~10 min a pé."] },
+      { name: "Les Invalides", type: "atracao", coords: [48.8566, 2.3126], area: "Paris 7e",
+        desc: ["Por fora: o domo dourado (Túmulo de Napoleão) é uma das silhuetas mais bonitas de Paris.", "Coladinho ao Rodin; a esplanada já vale a passada."] },
+      { name: "Torre Eiffel", type: "atracao", coords: [48.8584, 2.2945], area: "Paris 7e",
+        price: "✅ INGRESSO COMPRADO — 10h, 8/jul · 2º andar ~€19/€9,50 · topo ~€28/€14", desc: ["Cheguem ~9h40 para a revista de segurança (mochila passa por revista — venham leves).", "Reservem 2–3h, sem pressa — o dia está folgado.", "⚠️ Vidro e álcool proibidos dentro da Torre (no gramado do Champ de Mars, tudo certo)."] },
+      { name: "Champ de Mars", type: "parque", coords: [48.8556, 2.2986], area: "Paris 7e",
+        desc: ["Almoço: piquenique clássico na grama em frente à Torre.", "Baguete + queijo + frutas de boulangerie próxima."] },
+      { name: "Arco do Triunfo", type: "atracao", coords: [48.8738, 2.2950], area: "Place Charles de Gaulle–Étoile",
+        desc: ["Só por fora (vocês já têm a vista do alto da Eiffel): arquitetura imperial, relevos e o Túmulo do Soldado Desconhecido (chama reacesa 18h30).", "⚠️ Use a passagem subterrânea — nunca atravesse a rotatória.", "Do Champ de Mars: suba ao Trocadéro (foto clássica da Eiffel) e desça os Champs-Élysées."] },
       { name: "Basilique du Sacré-Cœur", type: "igreja", coords: [48.8867, 2.3431], area: "Montmartre",
-        price: "Gratuito", desc: ["Subir a colina (a pé ou de funicular — gratuito com metrô).", "Vista panorâmica de Paris de graça."] },
+        price: "Gratuito", desc: ["Suba de funicular (gratuito com o passe de metrô).", "Vista panorâmica de Paris de graça — linda ao pôr do sol."] },
       { name: "Place du Tertre", type: "atracao", coords: [48.8865, 2.3408], area: "Montmartre",
-        desc: "Artistas e pintores ao ar livre (filho vai adorar). Becos das Abadessas e moinhos históricos por perto." }
+        desc: "Pintores ao ar livre (filho vai gostar). Becos das Abadessas e moinhos históricos por perto." },
+      { name: "Espace Dalí", type: "museu", coords: [48.8862, 2.3389], area: "Montmartre",
+        desc: "Opcional indoor: esculturas surreais e relógios derretendo — a melhor parada de Montmartre para criança." }
     ],
-    tips: ["Fim de tarde: retorno relaxado, jantar no bairro do hotel."]
+    tips: ["Dormir no Novotel Vaugirard (de Montmartre, L12 Abbesses/Pigalle → Vaugirard, direto).", "Jantar em Abbesses (bons bistrôs) ou de volta ao centro."]
   },
 
   /* ---------------------- DIA 7 ---------------------- */
   {
-    id: 7, date: "9 jul", weekday: "Quarta", city: "Paris", emoji: "🗼",
-    title: "Torre Eiffel → Retorno a Londres",
-    summary: "Manhã na Torre Eiffel, piquenique no Champ de Mars, Eurostar de volta à tarde.",
+    id: 7, date: "9 jul", weekday: "Quinta", city: "Paris", emoji: "🖼️",
+    title: "Museu do Louvre → Retorno a Londres",
+    summary: "Louvre às 10h30 com a manhã inteira, almoço no Marais, Eurostar de volta ~18h.",
     places: [
-      { name: "Torre Eiffel", type: "atracao", coords: [48.8584, 2.2945], area: "Paris 7e",
-        price: "2º andar ~€19/€9,50 · Topo ~€28/€14 — compre online (esgota semanas antes)", desc: ["Chegue cedo (abertura ~9h) para evitar multidões.", "Reserve 2–3h. O topo vale muito pela vista."] },
-      { name: "Champ de Mars", type: "parque", coords: [48.8556, 2.2986], area: "Paris 7e",
-        desc: ["Almoço: piquenique na grama em frente à Torre — experiência clássica de Paris.", "Baguete + queijo + frutas comprados em boulangerie próxima."] },
+      { name: "Museu do Louvre", type: "museu", coords: [48.8606, 2.3376], area: "Paris 1er",
+        price: "~€22 adulto / grátis < 18 — INGRESSO 10h30 (comprar online)", desc: ["Checkout no Novotel de manhã; mochilas no vestiaire gratuito do Louvre.",
+          "Manhã inteira (~3–3h30, até ~14h) — visita tranquila. Entrem pela pirâmide menor (Carrousel du Louvre).",
+          "Pular: antiguidades egípcias e gregas menores (já vistas no British)."],
+        highlights: [
+          { name: "Mona Lisa / ala Denon", note: "Logo cedo, antes de lotar mais — vale a experiência do fenômeno, mais que o quadro." },
+          { name: "Vênus de Milo e Vitória de Samotrácia", note: "Impactantes, não exigem explicação." },
+          { name: "Apartamentos de Napoleão III", where: "ala Richelieu", note: "Luxo de cenário de filme — ótimo para adolescente." },
+          { name: "Castelo medieval no subsolo", where: "Sully, piso -1", note: "Fundações da fortaleza do séc. XII, concreto e inesperado." },
+          { name: "Grande Galerie + Coleção islâmica", note: "3–4 telas (Caravaggio, Vermeer, Bodas de Caná) + a ala islâmica, se houver fôlego." }
+        ] },
+      { name: "Le Marais (Rue des Rosiers)", type: "restaurante", coords: [48.8571, 2.3590], area: "Paris 4e",
+        desc: "Almoço: falafel famoso e barato, ou boulangerie. Depois, tarde leve (Jardin des Tuileries / Marais) perto do centro." },
       { name: "Paris Gare du Nord", type: "transporte", coords: [48.8809, 2.3553], area: "Paris",
-        desc: ["Tarde: Eurostar de volta a Londres.", "Verifique horários: trens da tarde chegam a Londres no fim de tarde/noite.", "Gare du Nord → St Pancras ~2h15."] }
+        desc: ["Eurostar de volta ~18h → chegada London St Pancras ~19h15.", "Estejam na Gare du Nord ~17h (check-in fecha ~30–45 min antes)."] },
+      { name: "Chegada Londres → hotel (Park Plaza County Hall)", type: "transporte", coords: [51.5320, -0.1263], area: "King's Cross St Pancras",
+        desc: ["Sem troca de linha: Circle line (sentido Tower Hill) → Westminster → atravessar a Westminster Bridge a pé (~10 min).", "Com bagagem, táxi/Uber St Pancras → County Hall (~15–20 min, ~£15–20) é cômodo."] }
     ],
-    tips: ["Chegada em Londres: descanso — amanhã Greenwich!"]
+    tips: ["Jantar tranquilo no South Bank, perto do hotel — amanhã Greenwich!"]
   },
 
   /* ---------------------- DIA 8 ---------------------- */
   {
-    id: 8, date: "10 jul", weekday: "Quinta", city: "Londres", emoji: "⚓",
+    id: 8, date: "10 jul", weekday: "Sexta", city: "Londres", emoji: "⚓",
     title: "Greenwich",
     summary: "Dia inteiro em Greenwich — vá de barco pelo Tâmisa (Thames Clipper).",
     places: [
@@ -260,14 +265,14 @@ const DAYS = [
 
   /* ---------------------- DIA 9 ---------------------- */
   {
-    id: 9, date: "11 jul", weekday: "Sexta", city: "Oxford", emoji: "🎓",
+    id: 9, date: "11 jul", weekday: "Sábado", city: "Oxford", emoji: "🎓",
     title: "Oxford",
     summary: "Dia inteiro em Oxford — trem de Paddington (~1h, ~£25–35 ida e volta).",
     places: [
       { name: "Paddington Station", type: "transporte", coords: [51.5154, -0.1755], area: "Londres",
         desc: "Trem para Oxford (~1h, ~£25–35 ida e volta)." },
       { name: "Christ Church College", type: "atracao", coords: [51.7505, -1.2557], area: "Oxford",
-        price: "~£18", desc: "O college mais famoso; o refeitório inspirou o de Hogwarts." },
+        price: "~£18 (online economiza ~£2)", desc: ["O college mais famoso; o refeitório (Great Hall) inspirou o de Hogwarts.", "⚠️ Sábado: o Great Hall fecha das 10h30 às 14h — cheguem antes das 10h30 ou depois das 14h para vê-lo.", "A catedral fecha 16h45 para o coro."] },
       { name: "Radcliffe Camera", type: "atracao", coords: [51.7536, -1.2540], area: "Oxford",
         desc: "Arquitetura medieval de tirar o fôlego." },
       { name: "Bodleian Library", type: "atracao", coords: [51.7548, -1.2543], area: "Oxford",
@@ -291,9 +296,9 @@ const DAYS = [
 
   /* ---------------------- DIA 10 ---------------------- */
   {
-    id: 10, date: "12 jul", weekday: "Sábado", city: "Londres", emoji: "🎨",
-    title: "Último dia + Partida",
-    summary: "Tate Modern + The Shard de manhã, últimas compras, partida à noite.",
+    id: 10, date: "12 jul", weekday: "Domingo", city: "Londres", emoji: "🧸",
+    title: "Camden + Bandai → Partida",
+    summary: "Manhã em Camden (Bandai Namco Cross Store + Plataforma 9¾), tarde opcional Tate/Shard, partida à noite.",
     places: [
       { name: "Tate Modern", type: "museu", coords: [51.5076, -0.0994], area: "South Bank",
         price: "Gratuito", desc: ["Arte contemporânea na antiga usina elétrica.", "Turbine Hall sempre tem instalação de grande escala — impressionante."] },
@@ -301,10 +306,21 @@ const DAYS = [
         price: "~£32 adulto", desc: ["Vista do 72º andar. Vale para fechar a viagem com chave de ouro."] },
       { name: "Sky Garden", type: "mirante", coords: [51.5113, -0.0837], area: "Fenchurch St",
         price: "Gratuito (reserva online antecipada)", desc: "Alternativa gratuita ao The Shard." },
+      { name: "Camden Market", type: "mercado", coords: [51.5415, -0.1463], area: "Camden Town · Chalk Farm Rd",
+        price: "Entrada gratuita · abre domingo 10h–18h ✅", desc: ["Movido para o domingo da partida (manhã). Aberto todos os dias 10h–18h.", "Mistura de comida do mundo, roupas alternativas, itens de colecionador, arte e cultura pop.", "Chegue cedo (10h) para evitar a multidão do meio-dia.", "💡 Metrô: Northern Line, estação Camden Town.", "⚠️ Camden fica ao norte e Heathrow a oeste: Camden de manhã → hotel pegar as malas → aeroporto com 3h de antecedência."] },
+      { name: "Bandai Namco Cross Store", type: "loja", coords: [51.5415, -0.1463], area: "Camden Market · Chalk Farm Rd",
+        desc: ["Loja oficial da Bandai Namco dentro do Camden Market.", "Foco em Tamashii Nations: figuras S.H.Figuarts, Gundam, Ultraman, Dragon Ball, One Piece, entre outros.", "Produtos exclusivos e edições limitadas do Reino Unido — difíceis de encontrar no Brasil.", "💡 Ótima parada para o filho (e para o pai). Confira o site antes: bandainamcocrossstoreuk.com/tamashii-nations"],
+        highlights: [
+          { name: "S.H.Figuarts", note: "Linha de action figures articuladas de alta qualidade — Dragon Ball, Naruto, Demon Slayer, Marvel." },
+          { name: "Gundam Model Kits", note: "Kits exclusivos UK que não chegam ao Brasil com facilidade." },
+          { name: "Exclusivos Tamashii Nations", note: "Peças que só aparecem em lojas oficiais — vale checar antes da visita o que está disponível." }
+        ] },
+      { name: "King's Cross — Plataforma 9¾", type: "loja", coords: [51.5320, -0.1240], area: "King's Cross Station",
+        desc: ["Foto na plataforma do Harry Potter + loja oficial, a ~10 min de Camden de metrô e a caminho do centro.", "Aberta domingo."] },
       { name: "Heathrow Airport", type: "transporte", coords: [51.4700, -0.4543], area: "Londres",
         desc: ["Partida à noite — chegue com 3h de antecedência.", "Linha Piccadilly direto do centro (~1h, ~£6)."] }
     ],
-    tips: ["Almoço: South Bank ou mercado próximo.", "Tarde: últimas compras, preparar malas."]
+    tips: ["Manhã: Camden Market + Bandai Namco Cross Store + Plataforma 9¾ (Northern Line até Camden Town). Mercado e loja abrem domingo ✅.", "Almoço no próprio Camden Market — comida de rua variada e barata.", "Tarde opcional: Tate Modern (colado ao hotel) + The Shard, antes de pegar as malas.", "Noite: Heathrow com 3h de antecedência."]
   }
 ];
 
@@ -319,7 +335,6 @@ const PRATICO = {
       ["Tower of London", "~£85"],
       ["Cutty Sark", "~£45"],
       ["The Shard", "~£96"],
-      ["Sainte-Chapelle Paris", "~€39"],
       ["Museus gratuitos", "£0 / €0"]
     ],
     notas: [
