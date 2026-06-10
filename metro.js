@@ -68,6 +68,41 @@
     return { cost: bestCost, legs: moved };
   }
 
+  /* ---------- sentido da linha (terminal à frente) ---------- */
+  function legDirection(d, leg) {
+    // subgrafo da linha
+    if (!d._lineAdj) d._lineAdj = {};
+    let adjL = d._lineAdj[leg.line];
+    if (!adjL) {
+      adjL = d._lineAdj[leg.line] = {};
+      d.edges.forEach(([a, b, ln]) => {
+        if (ln !== leg.line) return;
+        (adjL[a] = adjL[a] || []).push(b);
+        (adjL[b] = adjL[b] || []).push(a);
+      });
+    }
+    const n = leg.sts.length, prev = leg.sts[n - 2], end = leg.sts[n - 1];
+    if ((adjL[end] || []).length === 1) return d.stations[end][0]; // desce no terminal
+    // BFS a partir do fim, sem voltar: terminais alcançáveis = sentido do trem
+    const seen = new Set([prev, end]);
+    let frontier = [end];
+    const termini = [];
+    while (frontier.length) {
+      const next = [];
+      frontier.forEach(s => (adjL[s] || []).forEach(x => {
+        if (seen.has(x)) return;
+        seen.add(x);
+        if ((adjL[x] || []).length === 1) termini.push(x); else next.push(x);
+      }));
+      frontier = next;
+    }
+    if (!termini.length) { // linha circular (ex.: Circle): mostra próxima estação
+      const nx = (adjL[end] || []).find(x => x !== prev);
+      return nx != null ? "via " + d.stations[nx][0] : "";
+    }
+    return termini.slice(0, 2).map(t => d.stations[t][0]).join(" / ");
+  }
+
   /* ---------- UI ---------- */
   function cityHtml(view) {
     return `
@@ -116,9 +151,11 @@
       const a = d.stations[leg.sts[0]][0], b = d.stations[leg.sts[leg.sts.length - 1]][0];
       const stops = leg.sts.length - 1;
       const mids = leg.sts.slice(1, -1).map(s => d.stations[s][0]);
+      const dir = legDirection(d, leg);
       html += `<div class="pl-leg">
         <div class="pl-leg-h">${lineBadge(d, leg.line)}
           <span class="pl-leg-t"><b>${escM(a)}</b> → <b>${escM(b)}</b></span></div>
+        ${dir ? `<div class="pl-dir">➜ sentido <b>${escM(dir)}</b></div>` : ""}
         <div class="pl-leg-m">${stops} ${stops === 1 ? "parada" : "paradas"}${
           mids.length ? ` · <a class="pl-mid" data-mid="${view}-${i}">ver intermediárias</a>` : ""}</div>
         ${mids.length ? `<div class="pl-mids" id="${view}-mid-${i}">${mids.map(escM).join(" · ")}</div>` : ""}
@@ -148,7 +185,7 @@
     map.fitBounds([[Math.min(...lats), Math.min(...lons)],
                    [Math.max(...lats), Math.max(...lons)]], { padding: [10, 10] });
     const canvas = L.canvas({ padding: 0.3 });
-    // linhas
+    // linhas (estilo plano oficial: traço grosso, cor cheia)
     const byLine = {};
     d.edges.forEach(([a, b, ln]) => (byLine[ln] = byLine[ln] || []).push([a, b]));
     S.lineLayers = {};
@@ -157,19 +194,22 @@
       const g = L.layerGroup();
       segs.forEach(([a, b]) => {
         L.polyline([d.stations[a].slice(1), d.stations[b].slice(1)],
-          { color: col, weight: 3, opacity: 0.9, renderer: canvas }).addTo(g);
+          { color: col, weight: 4.5, opacity: 1, lineCap: "round", renderer: canvas }).addTo(g);
       });
       g.addTo(map); S.lineLayers[ln] = g;
     });
-    // estações
+    // estações: baldeação = círculo branco com anel preto (padrão TfL);
+    // demais = bolinha na cor da linha
     const inter = d.stations.map(() => new Set());
     d.edges.forEach(([a, b, ln]) => { inter[a].add(ln); inter[b].add(ln); });
+    S.inter = inter;
     S.stMarkers = d.stations.map((s, i) => {
       const isInt = inter[i].size > 1;
-      const m = L.circleMarker(s.slice(1), {
-        radius: isInt ? 5 : 3.5, color: "#fff", weight: isInt ? 2 : 1.2,
-        fillColor: isInt ? "#0e1116" : "#9aa6b6", fillOpacity: 1, renderer: canvas
-      }).addTo(map);
+      const lcol = (d.lines[[...inter[i]][0]] || {}).c || "#555";
+      const m = L.circleMarker(s.slice(1), isInt
+        ? { radius: 5, color: "#111", weight: 2.4, fillColor: "#fff", fillOpacity: 1, renderer: canvas }
+        : { radius: 3, color: "#fff", weight: 1.4, fillColor: lcol, fillOpacity: 1, renderer: canvas }
+      ).addTo(map);
       m.bindPopup(`<b>${escM(s[0])}</b><br>` +
         [...inter[i]].map(ln => lineBadge(d, ln)).join(" ") +
         `<div class="pop-set"><button onclick="MetroUI.setEnd('${view}',${i},'from')">🚩 Partida</button>
@@ -177,24 +217,44 @@
       return m;
     });
     S.routeLayer = L.layerGroup().addTo(map);
+    // rótulos por zoom (como no plano: nomes visíveis ao aproximar)
+    S.lblLayer = L.layerGroup().addTo(map);
+    const renderLabels = () => {
+      S.lblLayer.clearLayers();
+      if (S.routeOn) return; // rota desenhada tem rótulos próprios
+      const z = map.getZoom(), bb = map.getBounds().pad(0.1);
+      if (z < 12) return;
+      d.stations.forEach((s, i) => {
+        if (!bb.contains(s.slice(1))) return;
+        if (z < 13.5 && S.inter[i].size < 2) return; // zoom médio: só baldeações
+        L.marker(s.slice(1), {
+          interactive: false,
+          icon: L.divIcon({ className: "st-name", html: escM(s[0]), iconSize: null, iconAnchor: [-7, 7] })
+        }).addTo(S.lblLayer);
+      });
+    };
+    map.on("zoomend moveend", renderLabels);
+    renderLabels();
   }
 
   function drawRoute(view, r) {
     const city = CITIES[view], d = METRO[city], S = state[view];
     S.routeLayer.clearLayers();
-    Object.values(S.lineLayers).forEach(g => g.eachLayer(l => l.setStyle({ opacity: r ? 0.18 : 0.9 })));
-    S.stMarkers.forEach(m => m.setStyle({ opacity: r ? 0.25 : 1, fillOpacity: r ? 0.25 : 1 }));
-    if (!r) return;
+    S.routeOn = !!r;
+    if (S.lblLayer) S.lblLayer.clearLayers();
+    Object.values(S.lineLayers).forEach(g => g.eachLayer(l => l.setStyle({ opacity: r ? 0.15 : 1 })));
+    S.stMarkers.forEach(m => m.setStyle({ opacity: r ? 0.2 : 1, fillOpacity: r ? 0.2 : 1 }));
+    if (!r) { if (S.map) S.map.fire("zoomend"); return; }
     const all = [];
     r.legs.forEach(leg => {
-      const col = (d.lines[leg.line] || {}).c || "#fff";
+      const col = (d.lines[leg.line] || {}).c || "#333";
       const pts = leg.sts.map(s => d.stations[s].slice(1));
-      L.polyline(pts, { color: "#fff", weight: 9, opacity: 0.85 }).addTo(S.routeLayer);
-      L.polyline(pts, { color: col, weight: 5, opacity: 1 }).addTo(S.routeLayer);
+      L.polyline(pts, { color: "#111", weight: 9, opacity: 0.9, lineCap: "round" }).addTo(S.routeLayer);
+      L.polyline(pts, { color: col, weight: 5, opacity: 1, lineCap: "round" }).addTo(S.routeLayer);
       leg.sts.forEach(s => all.push(d.stations[s].slice(1)));
       [leg.sts[0], leg.sts[leg.sts.length - 1]].forEach(s => {
         L.circleMarker(d.stations[s].slice(1), {
-          radius: 6, color: "#fff", weight: 2.5, fillColor: col, fillOpacity: 1
+          radius: 6, color: "#111", weight: 2.6, fillColor: "#fff", fillOpacity: 1
         }).addTo(S.routeLayer).bindTooltip(d.stations[s][0], {
           permanent: true, direction: "top", className: "st-lbl", offset: [0, -7]
         });
@@ -206,27 +266,38 @@
   /* ---------- busca/autocomplete ---------- */
   function wireSearch(view) {
     const city = CITIES[view], d = METRO[city], S = state[view];
+    // índice alfabético de todas as estações
+    const alpha = d.stations.map((s, i) => i)
+      .sort((a, b) => d.stations[a][0].localeCompare(d.stations[b][0], "pt"));
     ["from", "to"].forEach(which => {
       const inp = document.getElementById(`${view}-${which}`);
       const sug = document.getElementById(`${view}-${which}-sug`);
-      inp.addEventListener("input", () => {
-        S[which] = null;
+      const show = () => {
         const q = nrm(inp.value);
-        if (q.length < 2) { sug.style.display = "none"; return; }
-        const hits = [];
-        d.stations.forEach((s, i) => {
-          const n = nrm(s[0]);
-          if (n.includes(q)) hits.push([n.indexOf(q), i]);
-        });
-        hits.sort((a, b) => a[0] - b[0] || d.stations[a[1]][0].localeCompare(d.stations[b[1]][0]));
-        if (!hits.length) { sug.style.display = "none"; return; }
-        sug.innerHTML = hits.slice(0, 8).map(([, i]) =>
+        let list;
+        if (!q) {
+          list = alpha; // lista completa, rolável
+        } else {
+          const hits = [];
+          alpha.forEach(i => {
+            const n = nrm(d.stations[i][0]);
+            const p = n.indexOf(q);
+            if (p >= 0) hits.push([p, i]);
+          });
+          hits.sort((a, b) => a[0] - b[0]);
+          list = hits.map(h => h[1]);
+        }
+        if (!list.length) { sug.style.display = "none"; return; }
+        sug.innerHTML = list.map(i =>
           `<div class="pl-opt" data-i="${i}">${escM(d.stations[i][0])}</div>`).join("");
         sug.style.display = "block";
+        sug.scrollTop = 0;
         sug.querySelectorAll(".pl-opt").forEach(o => o.onclick = () => {
           MetroUI.setEnd(view, +o.dataset.i, which);
         });
-      });
+      };
+      inp.addEventListener("focus", show);
+      inp.addEventListener("input", () => { S[which] = null; show(); });
       inp.addEventListener("blur", () => setTimeout(() => { sug.style.display = "none"; }, 250));
     });
     document.querySelectorAll(`#${view} .pl-x`).forEach(b => b.onclick = () => {

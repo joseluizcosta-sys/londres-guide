@@ -43,4 +43,14 @@ window.MetroUI.setEnd("tube", 50, "to");
 const res = window.document.getElementById("tube-result").textContent;
 console.log("rota tube:", res.includes("min") ? "OK -> " + res.trim().slice(0, 80) : "FALHOU: " + res.slice(0, 120));
 if (!res.includes("min")) fail = 1;
+console.log("sentido:", res.includes("sentido") ? "OK" : "FALHOU (sem 'sentido')");
+if (!res.includes("sentido")) fail = 1;
+// lista completa ao focar campo vazio
+const inp = window.document.getElementById("metro-from");
+inp.value = "";
+inp.dispatchEvent(new window.Event("focus"));
+const nOpts = window.document.querySelectorAll("#metro-from-sug .pl-opt").length;
+const total = window.METRO.paris.stations.length;
+console.log(`lista De/Para: ${nOpts}/${total} ${nOpts === total ? "OK" : "FALHOU"}`);
+if (nOpts !== total) fail = 1;
 process.exit(fail);

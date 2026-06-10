@@ -150,7 +150,8 @@
   .pl-x{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;
     border:none;color:var(--muted);font-size:17px;padding:4px 8px;cursor:pointer}
   .pl-sug{display:none;position:absolute;left:0;right:0;top:calc(100% + 3px);z-index:800;
-    background:var(--bg2);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    background:var(--bg2);border:1px solid var(--line);border-radius:10px;
+    max-height:42vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
     box-shadow:0 8px 22px rgba(0,0,0,.45)}
   .pl-opt{padding:10px 12px;font-size:13.5px;border-top:1px solid var(--line);cursor:pointer}
   .pl-opt:first-child{border-top:none}
@@ -170,14 +171,17 @@
   .pl-mids{display:none;font-size:12px;color:#bcc6d2;background:var(--bg2);
     border:1px solid var(--line);border-radius:9px;padding:7px 9px;margin:5px 0}
   .pl-troca{font-size:12px;color:var(--accent2);margin:6px 0 2px}
+  .pl-dir{font-size:12.5px;color:var(--gold);margin:4px 0 1px}
   .lbadge{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;
     border-radius:20px;white-space:nowrap}
   .netmap{height:calc(100vh - 360px);min-height:300px;border-radius:14px;
-    border:1px solid var(--line);overflow:hidden;background:#10141b}
+    border:1px solid var(--line);overflow:hidden;background:#fff}
   .pl-hint{font-size:11px;color:var(--muted);margin-top:8px;text-align:center}
-  .st-lbl{background:rgba(14,17,22,.88);border:1px solid var(--line);color:#fff;
-    font-size:11px;font-weight:700;padding:2px 7px;border-radius:7px;box-shadow:none}
+  .st-lbl{background:#fff;border:1px solid #bbb;color:#111;
+    font-size:11px;font-weight:700;padding:2px 7px;border-radius:7px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
   .st-lbl::before{display:none}
+  .st-name{color:#1a1a2e;font-size:10px;font-weight:600;white-space:nowrap;
+    text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;pointer-events:none;width:auto!important;height:auto!important}
   .pop-set{display:flex;gap:6px;margin-top:8px}
   .pop-set button{flex:1;background:#eef2f7;border:1px solid #d6dde6;border-radius:8px;
     padding:6px 8px;font-size:12px;font-weight:700;cursor:pointer}
