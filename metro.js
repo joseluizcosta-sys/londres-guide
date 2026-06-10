@@ -139,9 +139,14 @@
     const city = CITIES[view], d = METRO[city], S = state[view];
     const map = L.map(view + "-map", {
       zoomControl: true, attributionControl: false,
-      minZoom: 10, maxZoom: 16, zoomSnap: 0.5
+      minZoom: 9, maxZoom: 16, zoomSnap: 0.5
     });
     S.map = map;
+    // IMPORTANTE: definir a vista ANTES de adicionar camadas,
+    // senão o Leaflet lança "Set map center and zoom first".
+    const lats = d.stations.map(s => s[1]), lons = d.stations.map(s => s[2]);
+    map.fitBounds([[Math.min(...lats), Math.min(...lons)],
+                   [Math.max(...lats), Math.max(...lons)]], { padding: [10, 10] });
     const canvas = L.canvas({ padding: 0.3 });
     // linhas
     const byLine = {};
@@ -171,8 +176,6 @@
          <button onclick="MetroUI.setEnd('${view}',${i},'to')">🎯 Chegada</button></div>`);
       return m;
     });
-    const lats = d.stations.map(s => s[1]), lons = d.stations.map(s => s[2]);
-    map.fitBounds([[Math.min(...lats), Math.min(...lons)], [Math.max(...lats), Math.max(...lons)]]);
     S.routeLayer = L.layerGroup().addTo(map);
   }
 
@@ -261,10 +264,16 @@
     open(view) { // chamado ao abrir a aba
       const S = state[view] = state[view] || {};
       if (!S.inited) {
-        S.inited = true;
-        document.getElementById(view).innerHTML = cityHtml(view);
-        initNetMap(view);
-        wireSearch(view);
+        try {
+          document.getElementById(view).innerHTML = cityHtml(view);
+          initNetMap(view);
+          wireSearch(view);
+          S.inited = true;
+        } catch (e) {
+          document.getElementById(view).innerHTML =
+            `<div class="pl-card pl-none">Erro ao montar o mapa: ${escM(e.message || e)}.<br>
+             Feche e reabra o app; se persistir, me avise com esta mensagem.</div>`;
+        }
       } else if (S.map) {
         setTimeout(() => S.map.invalidateSize(), 80);
       }
