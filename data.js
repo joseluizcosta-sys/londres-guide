@@ -18,7 +18,7 @@
 const META = {
   title: "Londres + Paris",
   subtitle: "3 – 12 de Julho de 2026",
-  updated: "09/06/2026 — V3: Paris 3 dias (Torre qua 10h · Louvre qui 10h30) · Camden+Bandai no domingo"
+  updated: "10/06/2026 — V3: Eurostar 10h30 (7/jul) e 16h12 (9/jul) ✅ · Louvre 10h30 ✅ · +Les Deux Magots, Jardin du Luxembourg, Bouillon Chartier · fotos da Wikipédia"
 };
 
 // Aviso fixo do roteiro
@@ -158,20 +158,27 @@ const DAYS = [
   /* ---------------------- DIA 5 ---------------------- */
   {
     id: 5, date: "7 jul", weekday: "Terça", city: "Paris", emoji: "🚄",
-    title: "Eurostar → Paris | Quartier Latin + Tuileries",
-    summary: "Chegada ~meio-dia, tarde no Quartier Latin (Au Plat d'Étain, Notre-Dame, Shakespeare & Co.), noite na Fête des Tuileries.",
+    title: "Eurostar → Paris | Saint-Germain + Tuileries",
+    summary: "Eurostar 10h30 (chegada ~13h45), tarde em Saint-Germain (Les Deux Magots, Au Plat d'Étain, Jardin du Luxembourg, Notre-Dame), jantar no Bouillon Chartier, noite na Fête des Tuileries.",
     places: [
       { name: "London St Pancras International", type: "transporte", coords: [51.5320, -0.1263], area: "Londres",
-        desc: ["Eurostar saindo de St Pancras — ~2h15 até Paris Gare du Nord.",
-          "Saindo ~9h–9h30, chegada a Paris ~meio-dia (1h de fuso a mais em Paris).",
-          "Reserve antes em eurostar.com (~£60–100/pessoa ida; mais barato quanto antes).",
+        desc: ["✅ Eurostar comprado: partida 10h30 (7/jul) — ~2h15 até Paris Gare du Nord, chegada ~13h45 (1h de fuso a mais).",
+          "⏰ Estejam em St Pancras ~9h30 (check-in/segurança/imigração fecham 30–45 min antes).",
           "Passaporte obrigatório. ETA não vale para a França — brasileiros não precisam de visto (90 dias Schengen)."] },
       { name: "Paris Gare du Nord", type: "transporte", coords: [48.8809, 2.3553], area: "Paris",
-        desc: "Chegada ~meio-dia. Ao hotel (zona Montparnasse): L4 até Montparnasse-Bienvenüe → troca L12 (~30 min). Deixem as mochilas e sigam ao passeio." },
+        desc: "Chegada ~13h45. Ao hotel (zona Montparnasse): L4 até Montparnasse-Bienvenüe → troca L12 → Vaugirard (~30 min). Deixem as mochilas e sigam ao passeio." },
+      { name: "Café Les Deux Magots", type: "restaurante", coords: [48.8540, 2.3333], area: "Saint-Germain-des-Prés (6e)",
+        price: "Caro p/ refeição (~€7–9 só o café)", desc: ["6, place Saint-Germain-des-Prés — café histórico de Sartre, Beauvoir, Hemingway e Picasso.",
+          "💡 Vão só para um café/chocolate quente e a experiência — não para almoçar.",
+          "Terraço em frente à igreja mais antiga de Paris (Saint-Germain-des-Prés)."] },
       { name: "Au Plat d'Étain", type: "loja", coords: [48.8527, 2.3340], area: "Saint-Germain (Paris 6e)",
-        desc: ["16, rue Guisarde · Ter–Sáb 10h30–17h ⏰ cheguem antes das 17h.",
+        desc: ["16, rue Guisarde (3 min a pé dos Deux Magots) · Ter–Sáb 10h30–17h ⏰ cheguem antes das 17h.",
           "Loja de figurines de coleção desde 1775 — soldados históricos, Astérix & Obélix, pintados à mão.",
           "Ótimo para o filho de 12 anos; peças únicas fora do circuito de souvenir."] },
+      { name: "Jardin du Luxembourg", type: "parque", coords: [48.8462, 2.3372], area: "Paris 6e",
+        price: "Gratuito", desc: ["O jardim mais querido de Paris (~8 min a pé do Au Plat d'Étain).",
+          "Veleiros de brinquedo no tanque octogonal (aluga-se por poucos euros) — diversão clássica para o filho.",
+          "Palais du Luxembourg (Senado), pomar e cadeiras verdes para descansar depois do trem."] },
       { name: "Notre-Dame de Paris", type: "igreja", coords: [48.8530, 2.3499], area: "Île de la Cité",
         price: "Gratuito (reserva online recomendada)", desc: ["Reaberta em dez/2024 após restauração. Exterior impressionante, interior restaurado."] },
       { name: "Pont Neuf", type: "atracao", coords: [48.8566, 2.3412], area: "Île de la Cité",
@@ -179,11 +186,16 @@ const DAYS = [
       { name: "Shakespeare & Company", type: "loja", coords: [48.8525, 2.3470], area: "frente a Notre-Dame",
         desc: ["Livraria mais famosa do mundo, à beira do Sena.", "Livros novos e usados, gatos que moram na loja, história literária rica."] },
       { name: "Grande Mosquée de Paris", type: "atracao", coords: [48.8420, 2.3550], area: "Quartier Latin (5e)",
-        desc: ["Passar por fora — ~20 min a pé de Shakespeare & Co., ao lado do Jardin des Plantes.", "Arquitetura hispano-mourisca: azulejos, minarete de 33 m, pátios de inspiração da Alhambra.", "💡 Opcional barato: salão de chá com chá de menta + doces árabes."] },
+        desc: ["⚠️ Opcional — só se sobrar tempo (a tarde fica curta com chegada às 13h45).", "Passar por fora, ~15 min a pé a sudeste. Arquitetura hispano-mourisca: azulejos, minarete de 33 m, pátios de inspiração da Alhambra.", "💡 Barato: salão de chá com chá de menta + doces árabes."] },
+      { name: "Bouillon Chartier", type: "restaurante", coords: [48.8430, 2.3245], area: "Montparnasse (Paris 14e)",
+        price: "Barato (~€12–15/prato)", desc: ["Jantar sugerido (7/jul): 59 bd du Montparnasse — bistrô histórico, ambiente belle époque animado.",
+          "Clássicos franceses baratos: boeuf bourguignon, confit, profiteroles. Ótimo para família.",
+          "Não reserva — pode ter fila, mas anda rápido. A caminho do hotel (Vaugirard/L12).",
+          "Alternativa: crêperies da rue du Montparnasse (galette + crêpe doce, agrada o filho)."] },
       { name: "Fête des Tuileries", type: "parque", coords: [48.8634, 2.3275], area: "Jardin des Tuileries (1er)",
-        price: "Entrada grátis (paga só os brinquedos)", desc: ["Parque de diversões de verão (20/jun–23/ago 2026, todos os dias 11h–23h30).", "A 'noite mágica' do filho: roda-gigante com vista de Paris ao entardecer.", "Escurece ~21h30 no verão — dá tempo de jantar e curtir a roda iluminada."] }
+        price: "Entrada grátis (paga só os brinquedos)", desc: ["Parque de diversões de verão (20/jun–23/ago 2026, todos os dias 11h–23h30).", "A 'noite mágica' do filho: roda-gigante com vista de Paris ao entardecer.", "Escurece ~21h30 no verão — dá tempo de jantar e curtir a roda iluminada.", "💡 Quem quiser jantar de street food no parque pode pular o Bouillon Chartier."] }
     ],
-    tips: ["A L12 conecta o hotel direto a Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre).", "Volta ao hotel à noite: de Concorde, L12 direto.", "Au Plat d'Étain fecha às 17h — encaixe com folga."]
+    tips: ["A L12 conecta o hotel direto a Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre).", "Volta ao hotel à noite: de Concorde, L12 direto.", "Tarde enxuta (chegada 13h45): priorize Les Deux Magots + Au Plat d'Étain (fecha 17h) + Luxembourg; Mosquée fica como opcional."]
   },
 
   /* ---------------------- DIA 6 ---------------------- */
@@ -216,11 +228,11 @@ const DAYS = [
   {
     id: 7, date: "9 jul", weekday: "Quinta", city: "Paris", emoji: "🖼️",
     title: "Museu do Louvre → Retorno a Londres",
-    summary: "Louvre às 10h30 com a manhã inteira, almoço no Marais, Eurostar de volta ~18h.",
+    summary: "Louvre às 10h30 (manhã), almoço rápido perto do centro, Eurostar de volta 16h12 (chegada Londres ~17h27).",
     places: [
       { name: "Museu do Louvre", type: "museu", coords: [48.8606, 2.3376], area: "Paris 1er",
-        price: "~€22 adulto / grátis < 18 — INGRESSO 10h30 (comprar online)", desc: ["Checkout no hotel de manhã; mochilas no vestiaire gratuito do Louvre.",
-          "Manhã inteira (~3–3h30, até ~14h) — visita tranquila. Entrem pela pirâmide menor (Carrousel du Louvre).",
+        price: "~€22 adulto / grátis < 18 — ✅ INGRESSO COMPRADO: 10h30, 9/jul", desc: ["Checkout no hotel de manhã; mochilas no vestiaire gratuito do Louvre.",
+          "Manhã (~10h30 até ~13h30, ~3h). ⚠️ Olho no relógio: o trem é 16h12. Entrem pela pirâmide menor (Carrousel du Louvre).",
           "Pular: antiguidades egípcias e gregas menores (já vistas no British)."],
         highlights: [
           { name: "Mona Lisa / ala Denon", note: "Logo cedo, antes de lotar mais — vale a experiência do fenômeno, mais que o quadro." },
@@ -230,11 +242,11 @@ const DAYS = [
           { name: "Grande Galerie + Coleção islâmica", note: "3–4 telas (Caravaggio, Vermeer, Bodas de Caná) + a ala islâmica, se houver fôlego." }
         ] },
       { name: "Le Marais (Rue des Rosiers)", type: "restaurante", coords: [48.8571, 2.3590], area: "Paris 4e",
-        desc: "Almoço: falafel famoso e barato, ou boulangerie. Depois, tarde leve (Jardin des Tuileries / Marais) perto do centro." },
+        desc: "Almoço rápido (~13h30): falafel famoso e barato, ou boulangerie. ⚠️ Não demorem — o trem é 16h12. Opção mais perto: Tuileries, ao lado do Louvre." },
       { name: "Paris Gare du Nord", type: "transporte", coords: [48.8809, 2.3553], area: "Paris",
-        desc: ["Eurostar de volta ~18h → chegada London St Pancras ~19h15.", "Estejam na Gare du Nord ~17h (check-in fecha ~30–45 min antes)."] },
+        desc: ["✅ Eurostar de volta comprado: 16h12 → chegada London St Pancras ~17h27.", "Estejam na Gare du Nord até ~15h30 (check-in/segurança/imigração britânica fecham 30–45 min antes — não arrisquem a fila)."] },
       { name: "Chegada Londres → hotel (South Bank)", type: "transporte", coords: [51.5320, -0.1263], area: "King's Cross St Pancras",
-        desc: ["Sem troca de linha: Circle line (sentido Tower Hill) → Westminster → atravessar a Westminster Bridge a pé (~10 min).", "Com bagagem, táxi/Uber St Pancras → County Hall (~15–20 min, ~£15–20) é cômodo."] }
+        desc: ["Chegada ~17h27. Sem troca de linha: Circle line (sentido Tower Hill) → Westminster → atravessar a Westminster Bridge a pé (~10 min).", "Com bagagem, táxi/Uber St Pancras → County Hall (~15–20 min, ~£15–20) é cômodo."] }
     ],
     tips: ["Jantar tranquilo no South Bank, perto do hotel — amanhã Greenwich!"]
   },
