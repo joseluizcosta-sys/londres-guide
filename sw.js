@@ -1,5 +1,5 @@
 /* Service Worker — Londres + Paris guia offline */
-const APP = "lp-app-v10";      // app shell (bump version to force update)
+const APP = "lp-app-v11";      // app shell (bump version to force update)
 const TILES = "lp-tiles-v1";   // map tiles (kept across app updates)
 const PHOTOS = "lp-photos-v1"; // fotos da Wikipédia (kept across app updates)
 

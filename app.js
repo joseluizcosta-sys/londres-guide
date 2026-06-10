@@ -253,6 +253,97 @@ function wireChecklist() {
 }
 renderPratico();
 
+/* ---------- aba Vistos (checklist de locais) ---------- */
+const SEEN_KEY = "lp_seen_v1";
+const loadSeen = () => { try { return JSON.parse(localStorage.getItem(SEEN_KEY)) || {}; } catch (e) { return {}; } };
+const saveSeen = o => { try { localStorage.setItem(SEEN_KEY, JSON.stringify(o)); } catch (e) {} };
+const SKIP_TYPES = { transporte: 1, hotel: 1 }; // não entram na lista de "locais a visitar"
+
+function vsDetailHtml(p) {
+  const wt = WIKI[p.name];
+  const thumb = wt ? `<div class="thumb loading" data-wiki="${esc(wt)}"></div>` : "";
+  let hl = "";
+  if (p.highlights && p.highlights.length) {
+    hl = `<div class="hl"><div class="hl-t">Não perca</div>` +
+      p.highlights.map(h => `<div class="hl-i"><span class="h">${esc(h.name)}</span>` +
+        (h.where ? `<span class="w">${esc(h.where)}</span>` : "") +
+        (h.note ? `<span class="n">${esc(h.note)}</span>` : "") + `</div>`).join("") + `</div>`;
+  }
+  return thumb + (p.price ? `<div class="vs-price">${esc(p.price)}</div>` : "") + descHtml(p.desc) + hl;
+}
+
+function renderVistos() {
+  const root = document.getElementById("vistos");
+  const seen = loadSeen();
+  let total = 0, done = 0, body = "";
+  DAYS.forEach(d => {
+    const items = d.places.map((p, i) => ({ p, i })).filter(x => !SKIP_TYPES[x.p.type]);
+    if (!items.length) return;
+    body += `<div class="vs-day">${esc(d.date)} · ${esc(d.weekday)} — ${esc(d.title)}</div>`;
+    items.forEach(({ p, i }) => {
+      const key = d.id + "-" + i, on = !!seen[key];
+      total++; if (on) done++;
+      const t = TYPE[p.type] || TYPE.atracao;
+      const meta = [t.l, p.area].filter(Boolean).join(" · ");
+      body += `<div class="vs-item${on ? " done" : ""}" data-key="${key}">
+        <div class="vs-row">
+          <div class="vs-cap" data-act="check">${on ? "✓" : ""}</div>
+          <div class="vs-pin" style="color:${tcol(p.type)}">${t.e}</div>
+          <div class="vs-tx" data-act="toggle">
+            <div class="vs-nm">${esc(p.name)}</div>
+            <div class="vs-mt">${esc(meta)}</div>
+          </div>
+          <div class="vs-arrow" data-act="toggle">▶</div>
+        </div>
+        <div class="vs-det">${vsDetailHtml(p)}</div>
+      </div>`;
+    });
+  });
+  const pct = total ? Math.round(done / total * 100) : 0;
+  root.innerHTML =
+    `<div class="vs-top">
+      <div class="vs-prog">
+        <span class="pct" id="vsPct">${done}/${total}</span>
+        <div class="vs-bar"><i id="vsFill" style="width:${pct}%"></i></div>
+        <button class="vs-reset" id="vsReset">Limpar</button>
+      </div>
+      <div class="vs-hint">Toque no quadradinho para marcar como visto · na seta ▶ para ver os detalhes do local.</div>
+    </div>` + body;
+  wireVistos();
+  hydrateThumbs();
+}
+
+function vsUpdateCount() {
+  const total = document.querySelectorAll("#vistos .vs-item").length;
+  const done = document.querySelectorAll("#vistos .vs-item.done").length;
+  const pctEl = document.getElementById("vsPct"), fill = document.getElementById("vsFill");
+  if (pctEl) pctEl.textContent = done + "/" + total;
+  if (fill) fill.style.width = (total ? Math.round(done / total * 100) : 0) + "%";
+}
+
+function wireVistos() {
+  document.querySelectorAll("#vistos .vs-item").forEach(item => {
+    const key = item.dataset.key;
+    item.querySelector('[data-act="check"]').addEventListener("click", e => {
+      e.stopPropagation();
+      const seen = loadSeen();
+      const now = !item.classList.contains("done");
+      item.classList.toggle("done", now);
+      item.querySelector(".vs-cap").textContent = now ? "✓" : "";
+      if (now) seen[key] = 1; else delete seen[key];
+      saveSeen(seen);
+      vsUpdateCount();
+    });
+    item.querySelectorAll('[data-act="toggle"]').forEach(el =>
+      el.addEventListener("click", () => item.classList.toggle("open")));
+  });
+  const reset = document.getElementById("vsReset");
+  if (reset) reset.onclick = () => {
+    if (confirm("Limpar todas as marcações de locais vistos?")) { saveSeen({}); renderVistos(); }
+  };
+}
+renderVistos();
+
 /* ---------- Map ---------- */
 let map, layer, allMarkers = [];
 const TILE = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
