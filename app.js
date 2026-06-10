@@ -21,6 +21,11 @@ const tcol = t => `var(--t-${t})`;
    (localStorage + Service Worker), então funciona offline depois da 1ª vez. */
 const WIKI = {
   "Hotel Londres — Park Plaza County Hall": "County Hall, London",
+  "London Eye": "London Eye",
+  "The George Inn (pub família)": "George Inn, Southwark",
+  "Buckingham Palace — Troca da Guarda": "Buckingham Palace",
+  "St James's Park": "St James's Park",
+  "Tower of London (OPCIONAL)": "Tower of London",
   "British Museum": "British Museum",
   "Covent Garden": "Covent Garden",
   "Leicester Square": "Leicester Square",

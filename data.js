@@ -18,7 +18,7 @@
 const META = {
   title: "Londres + Paris",
   subtitle: "3 – 12 de Julho de 2026",
-  updated: "10/06/2026 — V3: Eurostar 10h30 (7/jul) e 16h12 (9/jul) ✅ · Louvre 10h30 ✅ · +Les Deux Magots, Jardin du Luxembourg, Bouillon Chartier · fotos da Wikipédia"
+  updated: "10/06/2026 — V4: Londres reorganizada (museus na 2ª · Camden+Bandai+Shard no dom 5 · Troca da Guarda · London Eye chegada · Tower opcional) + Paris (Les Deux Magots, Luxembourg, Bouillon Chartier) + fotos da Wikipédia"
 };
 
 // Aviso fixo do roteiro
@@ -29,16 +29,24 @@ const DAYS = [
   {
     id: 1, date: "3 jul", weekday: "Sexta", city: "Londres", emoji: "✈️",
     title: "Chegada a Londres",
-    summary: "Chegada à tarde → descanso e ambientação.",
+    summary: "Chegada à tarde → check-in, London Eye ao pôr do sol e primeiro pub.",
     places: [
       { name: "Hotel Londres — Park Plaza County Hall", type: "hotel", coords: [51.50166, -0.11713], area: "South Bank · 1 Addington St, SE1 7RY",
         desc: ["Hotel base em Londres (check-in no Dia 1).", "South Bank, ao lado do London Eye e da Westminster Bridge; perto do metrô (Waterloo / Westminster) e do Tâmisa."] },
+      { name: "London Eye", type: "atracao", coords: [51.5033, -0.1196], area: "South Bank (~3 min do hotel)",
+        price: "~£29 adulto / ~£26 criança (compre online c/ horário)", desc: ["🎡 Se a chegada permitir: roda-gigante ao entardecer, colada ao hotel (funciona até ~20h–21h no verão — confira o horário do dia).",
+          "Cápsula de 30 min com vista do Big Ben, Tâmisa e Parlamento ao pôr do sol — abertura mágica da viagem para o filho.",
+          "💡 Compre online com horário marcado: mais barato e sem fila."] },
+      { name: "The George Inn (pub família)", type: "restaurante", coords: [51.5045, -0.0905], area: "Borough (South Bank)",
+        desc: ["Jantar: pub histórico do séc. XVII (pátio galerado, do National Trust) — aceita crianças no jantar (até ~21h, acompanhadas).",
+          "Estreie a gastronomia britânica: fish & chips, pie ou bangers & mash.",
+          "💡 Mais perto do hotel: The Understudy ou The Marquis of Wellington (South Bank) também são família-friendly."] }
     ],
     tips: [
       "Passeio leve pelo bairro para se orientar.",
-      "Jantar tranquilo: pub tradicional perto do hotel para estrear a gastronomia britânica (fish & chips, pie ou Sunday roast).",
+      "Pub no Reino Unido: criança de 12 é bem-vinda em pub que serve comida, acompanhada, normalmente até ~21h.",
       "Compre um cartão Oyster no 1º dia (metrô/ônibus) ou use o cartão contactless direto — funciona igual.",
-      "💡 Filho vai gostar: observar os táxis pretos, ônibus vermelhos e a arquitetura nas primeiras horas já é uma experiência."
+      "💡 Subir na London Eye logo na chegada dá o 'mapa mental' da cidade."
     ]
   },
 
@@ -85,19 +93,52 @@ const DAYS = [
           "Marcas: Hoka, Saucony, Mizuno, On Running — atendimento técnico, sem pressão.",
           "Ótimo para comprar calçado de corrida/trail com orientação especializada."] },
       { name: "Chinatown", type: "restaurante", coords: [51.5115, -0.1310], area: "perto de Leicester Sq",
-        desc: "Jantar: barato, saboroso, ótimo para família." }
+        desc: ["Jantar barato, saboroso e ótimo para família.",
+          "🦆 Four Seasons (12 Gerrard St): famoso pato assado estilo Hong Kong — pratos que a criança reconhece.",
+          "🥟 Beijing Dumpling ou Golden Dragon: para dim sum/guiozas, vários pratinhos para compartilhar.",
+          "💡 Restaurante com patos na vitrine = bom assado. Chinatown é cheia de famílias chinesas — criança super bem-vinda."] }
     ],
     tips: []
   },
 
   /* ---------------------- DIA 3 ---------------------- */
   {
-    id: 3, date: "5 jul", weekday: "Domingo", city: "Londres", emoji: "🦕",
-    title: "South Kensington — Ciência e Natureza",
-    summary: "Natural History Museum de manhã, Science Museum à tarde, Hyde Park no fim do dia.",
+    id: 3, date: "5 jul", weekday: "Domingo", city: "Londres", emoji: "🤖",
+    title: "Camden + Colecionáveis + The Shard",
+    summary: "Camden Market e Bandai de manhã, Plataforma 9¾ a caminho, The Shard ao pôr do sol.",
     places: [
+      { name: "Camden Market", type: "mercado", coords: [51.5417, -0.1463], area: "Camden Town (Northern Line)",
+        desc: ["🆕 Museus de South Kensington saíram do domingo (lotado) para a segunda — domingo virou mercado + colecionáveis.",
+          "Aberto todos os dias 10h–18h. Chegue ~10h, antes de lotar. Comida de rua do mundo todo (almoço no local), lojas alternativas, arte e cultura pop."] },
+      { name: "Bandai Namco Cross Store", type: "loja", coords: [51.5413, -0.1466], area: "Stables Market, Camden",
+        desc: ["🤖 Tamashii Nations: S.H.Figuarts, Gundam, Dragon Ball, One Piece; exclusivos UK difíceis de achar no Brasil.",
+          "Confirme o horário de domingo no site (costuma abrir um pouco mais tarde): bandainamcocrossstoreuk.com/tamashii-nations."] },
+      { name: "King's Cross — Plataforma 9¾", type: "loja", coords: [51.5320, -0.1233], area: "King's Cross",
+        desc: "🚂 Foto no carrinho do Harry Potter + loja oficial. ~10 min de Camden de metrô, a caminho do centro." },
+      { name: "The Shard (The View)", type: "mirante", coords: [51.5045, -0.0865], area: "London Bridge (~10 min do hotel)",
+        price: "~£32 adulto / ~£28 criança", desc: ["🌆 72º andar, prédio mais alto do Reino Unido. Marque o horário do pôr do sol: vê Londres de dia e iluminada.",
+          "Fecha o dia com chave de ouro."] },
+      { name: "Sky Garden", type: "mirante", coords: [51.5113, -0.0837], area: "20 Fenchurch St",
+        price: "Gratuito (reserva online antecipada)", desc: "💡 Alternativa grátis ao Shard: jardim no topo com vista. Esgota — reserve com semanas de antecedência." }
+    ],
+    tips: ["Tarde leve: Regent's Canal em Camden (barcos, eclusas) ou descanso no hotel antes da noite.",
+      "Jantar: Borough Market / Hay's Galleria (South Bank, perto do Shard e do hotel)."]
+  },
+
+  /* ---------------------- DIA 4 ---------------------- */
+  {
+    id: 4, date: "6 jul", weekday: "Segunda", city: "Londres", emoji: "👑",
+    title: "Troca da Guarda + Museus de Ciência e Natureza",
+    summary: "Troca da Guarda às 11h, depois Natural History e Science Museum (dia útil = menos cheio).",
+    places: [
+      { name: "Buckingham Palace — Troca da Guarda", type: "atracao", coords: [51.5014, -0.1419], area: "St James's",
+        price: "Gratuito", desc: ["👑 Cerimônia às 11h (~45 min). Cheguem ~10h15 para um bom lugar (grades, Victoria Memorial ou ao longo do The Mall).",
+          "⚠️ Só rola em dias selecionados (tipicamente seg/qua/sex) e pode mudar por clima/eventos — confira a data em householddivision.org.uk na semana da viagem.",
+          "⏱️ Com a Guarda no mesmo dia, o museu HN não cabe às 10h — entra ~12h30. Se preferir o museu às 10h, teríamos de abrir mão da Guarda."] },
+      { name: "St James's Park", type: "parque", coords: [51.5026, -0.1340], area: "Westminster",
+        desc: "Um dos parques mais bonitos de Londres — atravesse depois da Guarda rumo ao metrô (Green Park → South Kensington, Piccadilly line, ~12 min)." },
       { name: "Natural History Museum", type: "museu", coords: [51.4967, -0.1764], area: "South Kensington",
-        price: "Gratuito", desc: ["Reserve 3h.", "Pular se o tempo apertar: galeria de peixes marinhos, botânica."],
+        price: "Gratuito", desc: ["Início da tarde (~12h30). Reserve ~2h30. Almoço rápido perto do museu antes de entrar."],
         highlights: [
           { name: "Hintze Hall (Hall Central)", note: "Esqueleto de baleia-azul suspenso no teto. Impacto imediato e obrigatório." },
           { name: "Dinossauros", where: "Blue Zone, 1º andar", note: "Destaque para 12 anos: T-Rex animatrónico, Triceratops, Diplodocus. Galeria longa e bem narrada." },
@@ -107,52 +148,22 @@ const DAYS = [
           { name: "Earthquake Simulator", where: "Red Zone", note: "Simula o terremoto de Kobe (1995) num supermercado. 30 segundos inesquecíveis." }
         ] },
       { name: "Science Museum", type: "museu", coords: [51.4978, -0.1745], area: "South Kensington",
-        price: "Gratuito (Wonderlab/IMAX ~£12)", desc: ["Reserve 2–3h."],
+        price: "Gratuito (Wonderlab/IMAX ~£12)", desc: ["Fim de tarde (a 3 min do NHM). Reserve ~2h."],
         highlights: [
           { name: "Making the Modern World", where: "térreo", note: "Locomotiva Puffing Billy (1814), cápsula Apollo 10 real, DNA de Watson & Crick." },
           { name: "Space", where: "piso 3", note: "Maior galeria espacial do Reino Unido: foguetes reais, módulo lunar, missão Apollo completa." },
-          { name: "Wonderlab", where: "piso 3 (pago ~£12)", note: "Física, química e luz interativas; demonstrações com nitrogênio líquido, plasma." },
           { name: "Computing & Mathematics", where: "piso 2", note: "Dos primeiros computadores à IA; peças de Bletchley Park e criptografia da WWII." },
-          { name: "Engineering Your Future", where: "piso 2", note: "Robótica, impressão 3D, engenharia civil; muito interativo." },
-          { name: "IMAX (pago ~£12)", note: "Se houver sessão de tema científico/espacial no dia, vale encaixar." }
+          { name: "Wonderlab", where: "piso 3 (pago ~£12)", note: "Física, química e luz interativas; demonstrações com nitrogênio líquido, plasma." }
         ] },
-      { name: "Hyde Park", type: "parque", coords: [51.5073, -0.1657], area: "South Kensington",
-        desc: ["Almoço: cafeteria do museu ou sanduíche no parque (ao lado).", "Passeio pelo parque no fim de tarde."] },
-      { name: "Serpentine Gallery", type: "museu", coords: [51.5045, -0.1750], area: "Hyde Park",
-        price: "Gratuito", desc: "Arte contemporânea, dentro do Hyde Park." },
-      { name: "Speaker's Corner", type: "atracao", coords: [51.5126, -0.1590], area: "Hyde Park",
-        desc: "Se ainda estiver ativo no fim de tarde — experiência inglesa única." },
       { name: "Kensington High Street", type: "restaurante", coords: [51.5009, -0.1925], area: "Kensington",
-        desc: "Jantar: diversas opções, incluindo Wagamama (ótimo custo-benefício)." }
+        desc: "Jantar: diversas opções, incluindo Wagamama (ótimo custo-benefício)." },
+      { name: "Tower of London (OPCIONAL)", type: "atracao", coords: [51.5081, -0.0759], area: "City of London",
+        price: "OPCIONAL — caro (~£34 adulto / £17 criança)", desc: ["🏰 Você achou caro, então saiu do roteiro fixo.",
+          "Se quiserem mesmo assim (~3h): Jóias da Coroa e Beefeaters são o ponto alto. Encaixe num período livre (ex.: manhã do Dia 10).",
+          "Por fora, a Tower Bridge e a muralha já valem a foto de graça."] }
     ],
-    tips: []
-  },
-
-  /* ---------------------- DIA 4 ---------------------- */
-  {
-    id: 4, date: "6 jul", weekday: "Segunda", city: "Londres", emoji: "👑",
-    title: "Tower of London + South Bank",
-    summary: "Tower of London de manhã, almoço no Borough Market, caminhada pela South Bank.",
-    places: [
-      { name: "Tower of London", type: "atracao", coords: [51.5081, -0.0759], area: "City of London",
-        price: "~£34 adulto / £17 criança — compre online", desc: ["Reserve 3h.",
-          "História brutal e fascinante: prisões reais, decapitações, Jóias da Coroa.",
-          "Yeoman Warders (Beefeaters) fazem tours gratuitos incluídos no ingresso."] },
-      { name: "Tower Bridge", type: "atracao", coords: [51.5055, -0.0754], area: "Tâmisa",
-        desc: "Atravessar a pé vale muito. Leva ao Borough Market (~10 min)." },
-      { name: "Borough Market", type: "mercado", coords: [51.5055, -0.0909], area: "South Bank",
-        desc: ["Almoço: um dos melhores mercados de comida do mundo.", "Provolone, pão artesanal, comidas do mundo — tudo acessível.", "Domingo ainda tem movimento (até ~17h)."] },
-      { name: "Tate Modern", type: "museu", coords: [51.5076, -0.0994], area: "South Bank",
-        price: "Gratuito", desc: "Na caminhada pela margem do Tâmisa. (Visita completa no Dia 10.)" },
-      { name: "Shakespeare's Globe", type: "atracao", coords: [51.5081, -0.0972], area: "South Bank",
-        desc: "Réplica do teatro elizabetano, na margem do rio." },
-      { name: "Millennium Bridge", type: "atracao", coords: [51.5095, -0.0985], area: "South Bank",
-        desc: "Passarela com vista para a City e a Catedral de St Paul." }
-    ],
-    tips: [
-      "Vista para a City of London e arranha-céus do outro lado do rio.",
-      "Fim de tarde: descanso no hotel — amanhã é dia de viagem a Paris."
-    ]
+    tips: ["A Guarda só ocorre seg/qua/sex (quarta/sexta caem em Paris/Greenwich) — por isso ficou na segunda.",
+      "Museus em dia útil = bem menos cheios que no domingo."]
   },
 
   /* ---------------------- DIA 5 ---------------------- */
@@ -306,31 +317,20 @@ const DAYS = [
 
   /* ---------------------- DIA 10 ---------------------- */
   {
-    id: 10, date: "12 jul", weekday: "Domingo", city: "Londres", emoji: "🧸",
-    title: "Camden + Bandai → Partida",
-    summary: "Manhã em Camden (Bandai Namco Cross Store + Plataforma 9¾), tarde opcional Tate/Shard, partida à noite.",
+    id: 10, date: "12 jul", weekday: "Domingo", city: "Londres", emoji: "✈️",
+    title: "Último dia (leve) → Partida",
+    summary: "Manhã leve no South Bank (Borough Market, Tate Modern), partida à noite.",
     places: [
+      { name: "Borough Market", type: "mercado", coords: [51.5055, -0.0909], area: "London Bridge",
+        price: "Dom 10h–16h", desc: ["Último almoço/brunch de despedida: um dos melhores mercados de comida do mundo.", "Pão artesanal, queijos, comidas do mundo — tudo acessível. A ~10 min do hotel."] },
       { name: "Tate Modern", type: "museu", coords: [51.5076, -0.0994], area: "South Bank",
-        price: "Gratuito", desc: ["Arte contemporânea na antiga usina elétrica.", "Turbine Hall sempre tem instalação de grande escala — impressionante."] },
-      { name: "The Shard (The View)", type: "mirante", coords: [51.5045, -0.0865], area: "London Bridge",
-        price: "~£32 adulto", desc: ["Vista do 72º andar. Vale para fechar a viagem com chave de ouro."] },
-      { name: "Sky Garden", type: "mirante", coords: [51.5113, -0.0837], area: "Fenchurch St",
-        price: "Gratuito (reserva online antecipada)", desc: "Alternativa gratuita ao The Shard." },
-      { name: "Camden Market", type: "mercado", coords: [51.5415, -0.1463], area: "Camden Town · Chalk Farm Rd",
-        price: "Entrada gratuita · abre domingo 10h–18h ✅", desc: ["Movido para o domingo da partida (manhã). Aberto todos os dias 10h–18h.", "Mistura de comida do mundo, roupas alternativas, itens de colecionador, arte e cultura pop.", "Chegue cedo (10h) para evitar a multidão do meio-dia.", "💡 Metrô: Northern Line, estação Camden Town.", "⚠️ Camden fica ao norte e Heathrow a oeste: Camden de manhã → hotel pegar as malas → aeroporto com 3h de antecedência."] },
-      { name: "Bandai Namco Cross Store", type: "loja", coords: [51.5415, -0.1463], area: "Camden Market · Chalk Farm Rd",
-        desc: ["Loja oficial da Bandai Namco dentro do Camden Market.", "Foco em Tamashii Nations: figuras S.H.Figuarts, Gundam, Ultraman, Dragon Ball, One Piece, entre outros.", "Produtos exclusivos e edições limitadas do Reino Unido — difíceis de encontrar no Brasil.", "💡 Ótima parada para o filho (e para o pai). Confira o site antes: bandainamcocrossstoreuk.com/tamashii-nations"],
-        highlights: [
-          { name: "S.H.Figuarts", note: "Linha de action figures articuladas de alta qualidade — Dragon Ball, Naruto, Demon Slayer, Marvel." },
-          { name: "Gundam Model Kits", note: "Kits exclusivos UK que não chegam ao Brasil com facilidade." },
-          { name: "Exclusivos Tamashii Nations", note: "Peças que só aparecem em lojas oficiais — vale checar antes da visita o que está disponível." }
-        ] },
-      { name: "King's Cross — Plataforma 9¾", type: "loja", coords: [51.5320, -0.1240], area: "King's Cross Station",
-        desc: ["Foto na plataforma do Harry Potter + loja oficial, a ~10 min de Camden de metrô e a caminho do centro.", "Aberta domingo."] },
+        price: "Gratuito", desc: ["Última dose de cultura, coladinho ao hotel.", "Turbine Hall sempre tem instalação de grande escala — impressionante."] },
+      { name: "Tower of London (OPCIONAL)", type: "atracao", coords: [51.5081, -0.0759], area: "City of London",
+        price: "OPCIONAL — ~£34 adulto / £17 criança", desc: ["🏰 Só para os corajosos: ~3h, se acordarem cedo e com pique. É a janela que sobrou caso queiram encaixá-la (você a marcou como opcional por ser cara)."] },
       { name: "Heathrow Airport", type: "transporte", coords: [51.4700, -0.4543], area: "Londres",
         desc: ["Partida à noite — chegue com 3h de antecedência.", "Linha Piccadilly direto do centro (~1h, ~£6)."] }
     ],
-    tips: ["Manhã: Camden Market + Bandai Namco Cross Store + Plataforma 9¾ (Northern Line até Camden Town). Mercado e loja abrem domingo ✅.", "Almoço no próprio Camden Market — comida de rua variada e barata.", "Tarde opcional: Tate Modern (colado ao hotel) + The Shard, antes de pegar as malas.", "Noite: Heathrow com 3h de antecedência."]
+    tips: ["Dia leve de propósito: Camden + Bandai + Shard já foram no domingo 5.", "Borough Market abre domingo (10h–16h) — perfeito para o último almoço.", "Noite: Heathrow com 3h de antecedência."]
   }
 ];
 
@@ -339,13 +339,14 @@ const PRATICO = {
   custos: {
     titulo: "💰 Estimativa de custos (3 pessoas)",
     itens: [
-      ["Eurostar ida e volta (3 pessoas)", "£360–500"],
-      ["Torre Eiffel (topo, 3 pessoas)", "~€84"],
-      ["Louvre (2 adultos — menor grátis)", "~€44"],
-      ["Tower of London", "~£85"],
+      ["Eurostar ida e volta (3 pessoas) ✅", "£360–500"],
+      ["Torre Eiffel (topo, 3 pessoas) ✅", "~€84"],
+      ["Louvre (2 adultos — menor grátis) ✅", "~€44"],
+      ["London Eye (3 pessoas)", "~£84"],
+      ["The Shard (3 pessoas)", "~£92 (grátis no Sky Garden)"],
       ["Cutty Sark", "~£45"],
-      ["The Shard", "~£96"],
-      ["Museus gratuitos", "£0 / €0"]
+      ["Tower of London", "~£85 (OPCIONAL — caro)"],
+      ["Guarda · British · NHM · Science · Tate · Sky Garden", "Grátis"]
     ],
     notas: [
       "Alimentação Londres: £15–25/refeição p/ 3 (mercados). Restaurantes: £35–60 p/ 3.",
