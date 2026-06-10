@@ -22,7 +22,7 @@ const META = {
 };
 
 // Aviso fixo do roteiro
-const AVISO = "⚠️ Reserve com antecedência: Torre Eiffel, Louvre e Tower of London esgotam rápido em julho. Compre online assim que as datas estiverem confirmadas.";
+const AVISO = "✅ Já comprados: Eurostar (ida/volta), Torre Eiffel e Louvre. Falta confirmar o ingresso da Tower of London (esgota rápido em julho — compre online).";
 
 const DAYS = [
   /* ---------------------- DIA 1 ---------------------- */
@@ -365,8 +365,8 @@ const PRATICO = {
   lembretes: {
     titulo: "⚠️ Lembretes críticos",
     itens: [
-      "Torre Eiffel e Louvre: compre com no mínimo 3–4 semanas de antecedência em julho.",
-      "Eurostar: quanto antes comprar, mais barato. Passaporte obrigatório.",
+      "✅ Já comprados: Eurostar ida (7/jul 10h30) e volta (9/jul 16h12), Torre Eiffel (8/jul 10h), Louvre (9/jul 10h30).",
+      "Tower of London: confirme se já comprou o ingresso online — ainda falta nesta lista.",
       "Brasileiros na França: livre de visto até 90 dias (Schengen) — só passaporte.",
       "Transporte Paris: Navigo Easy card ou contactless (metrô + RER).",
       "Seguro viagem: confirme que cobre também a França."
