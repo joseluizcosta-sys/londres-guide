@@ -30,6 +30,8 @@ document.querySelectorAll("nav button").forEach(b => {
     b.classList.add("active");
     document.getElementById(b.dataset.v).classList.add("active");
     if (b.dataset.v === "mapa" && map) setTimeout(() => { map.invalidateSize(); drawMarkers(); }, 80);
+    if ((b.dataset.v === "tube" || b.dataset.v === "metro") && window.MetroUI)
+      setTimeout(() => MetroUI.open(b.dataset.v), 30);
   };
 });
 

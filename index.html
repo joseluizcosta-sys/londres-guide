@@ -39,7 +39,7 @@
 
   nav{display:flex;gap:6px;margin-top:10px}
   nav button{flex:1;background:var(--bg2);border:1px solid var(--line);color:var(--muted);
-    padding:9px 4px;border-radius:11px;font-size:13px;font-weight:600;cursor:pointer}
+    padding:9px 2px;border-radius:11px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
   nav button.active{background:var(--accent);border-color:var(--accent);color:#fff}
 
   main{padding:14px 14px calc(28px + var(--safe-bot))}
@@ -138,6 +138,50 @@
 
   .foot{text-align:center;color:var(--muted);font-size:11px;margin-top:18px}
 
+  /* Planejador Tube/Métro */
+  .pl-card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:12px 13px;margin-bottom:10px}
+  .pl-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+  .pl-lab{width:36px;font-size:12px;font-weight:700;color:var(--muted)}
+  .pl-inwrap{flex:1;position:relative}
+  .pl-in{width:100%;box-sizing:border-box;background:var(--bg2);color:var(--txt);
+    border:1px solid var(--line);border-radius:10px;padding:10px 30px 10px 11px;font-size:14px}
+  .pl-in:focus{outline:none;border-color:var(--accent)}
+  .pl-x{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;
+    border:none;color:var(--muted);font-size:17px;padding:4px 8px;cursor:pointer}
+  .pl-sug{display:none;position:absolute;left:0;right:0;top:calc(100% + 3px);z-index:800;
+    background:var(--bg2);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    box-shadow:0 8px 22px rgba(0,0,0,.45)}
+  .pl-opt{padding:10px 12px;font-size:13.5px;border-top:1px solid var(--line);cursor:pointer}
+  .pl-opt:first-child{border-top:none}
+  .pl-opt:active{background:var(--card)}
+  .pl-btns{display:flex;gap:8px}
+  .pl-swap{background:var(--bg2);border:1px solid var(--line);color:var(--accent);
+    font-weight:600;font-size:13px;padding:9px 12px;border-radius:10px;cursor:pointer}
+  .pl-go{flex:1;background:var(--accent);border:none;color:#fff;font-weight:700;
+    font-size:14px;padding:9px 12px;border-radius:10px;cursor:pointer}
+  .pl-none{color:var(--muted);font-size:13px}
+  .pl-total{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:9px}
+  .pl-leg{border-top:1px solid var(--line);padding:9px 0 2px}
+  .pl-leg-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .pl-leg-t{font-size:13.5px}
+  .pl-leg-m{font-size:12px;color:var(--muted);margin:4px 0 2px}
+  .pl-mid{color:var(--accent);cursor:pointer}
+  .pl-mids{display:none;font-size:12px;color:#bcc6d2;background:var(--bg2);
+    border:1px solid var(--line);border-radius:9px;padding:7px 9px;margin:5px 0}
+  .pl-troca{font-size:12px;color:var(--accent2);margin:6px 0 2px}
+  .lbadge{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;
+    border-radius:20px;white-space:nowrap}
+  .netmap{height:calc(100vh - 360px);min-height:300px;border-radius:14px;
+    border:1px solid var(--line);overflow:hidden;background:#10141b}
+  .pl-hint{font-size:11px;color:var(--muted);margin-top:8px;text-align:center}
+  .st-lbl{background:rgba(14,17,22,.88);border:1px solid var(--line);color:#fff;
+    font-size:11px;font-weight:700;padding:2px 7px;border-radius:7px;box-shadow:none}
+  .st-lbl::before{display:none}
+  .pop-set{display:flex;gap:6px;margin-top:8px}
+  .pop-set button{flex:1;background:#eef2f7;border:1px solid #d6dde6;border-radius:8px;
+    padding:6px 8px;font-size:12px;font-weight:700;cursor:pointer}
+
   /* My location */
   .locbtn{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--accent);
     font-weight:600;font-size:13px;padding:10px;border-radius:11px;cursor:pointer;margin-bottom:10px}
@@ -157,6 +201,8 @@
   <nav>
     <button data-v="dias" class="active">Roteiro</button>
     <button data-v="mapa">Mapa</button>
+    <button data-v="tube">Tube</button>
+    <button data-v="metro">Métro</button>
     <button data-v="pratico">Prático</button>
   </nav>
 </header>
@@ -181,6 +227,10 @@
     <div class="legend" id="legend"></div>
   </section>
 
+  <section id="tube" class="view"></section>
+
+  <section id="metro" class="view"></section>
+
   <section id="pratico" class="view"></section>
 
   <div class="foot" id="foot"></div>
@@ -189,6 +239,8 @@
 <script src="vendor/leaflet.js"></script>
 <script src="vendor/leaflet.markercluster.js"></script>
 <script src="data.js"></script>
+<script src="metro-data.js"></script>
 <script src="app.js"></script>
+<script src="metro.js"></script>
 </body>
 </html>

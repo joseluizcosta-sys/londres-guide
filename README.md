@@ -5,6 +5,7 @@ PWA (web app instalável) para usar **offline no iPhone** durante a viagem de 3�
 ## Conteúdo
 - **Roteiro**: 10 dias (Londres + Paris + Oxford + Greenwich), com obras a ver em cada museu, restaurantes, atrações, lojas e dicas.
 - **Mapa**: mapa interativo com todos os locais (pinos por tipo), filtros por cidade/dia, e botão **Baixar mapas** para gravar os tiles offline.
+- **Tube / Métro**: mapa das redes de Londres (Tube + DLR + Elizabeth line) e Paris (Métro M1–M14, com extensões de 2024), com planejador de rota **De/Para** (melhor caminho, trocas e tempo estimado) — 100% offline.
 - **Prático**: custos, lembretes, documentos, checklist, apps e dicas.
 
 ## Como instalar no iPhone
@@ -29,5 +30,13 @@ Em ambos os casos: online, o app pega a versão nova sozinho (network-first + au
 
 ## Estrutura
 - `index.html` — interface · `app.js` — lógica · `data.js` — **dados do roteiro (edite aqui)**
+- `metro.js` — abas Tube/Métro (mapa das redes + roteador Dijkstra com penalidade de troca)
+- `metro-data.js` — grafos das redes (GERADO — não editar; rode `python3 build/generate.py`)
+- `build/` — datasets-fonte (tubemaps 2014 + EFREI 1998-2002 + patches 2021–2024), gerador e teste (`node build/test-route.js`)
 - `sw.js` — service worker (offline) · `manifest.webmanifest` + `icons/` — instalação
 - `vendor/` — Leaflet (mapas) vendorizado para funcionar offline
+
+### Notas das abas Tube/Métro
+- Rede desenhada a partir de coordenadas reais (sem tiles): zoom/pan offline, toque numa estação para defini-la como partida/chegada.
+- Tempos são estimativas (tempo de percurso + ~4–5 min por troca + margem de espera). Sem horários reais nem avisos de obras/fechamentos — confira o status das linhas no TfL Go / Bonjour RATP quando estiver online.
+- Londres inclui Elizabeth line (com Heathrow) e extensão Battersea; exclui Overground. Paris inclui M14 até Orly, M11 até Rosny, M4/M12/M13 estendidas.

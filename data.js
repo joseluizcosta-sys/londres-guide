@@ -18,7 +18,7 @@
 const META = {
   title: "Londres + Paris",
   subtitle: "3 – 12 de Julho de 2026",
-  updated: "09/06/2026 — V3: Paris 3 dias (Torre qua 10h · Louvre qui 10h30) · hotel Novotel Vaugirard · Camden+Bandai no domingo"
+  updated: "09/06/2026 — V3: Paris 3 dias (Torre qua 10h · Louvre qui 10h30) · Camden+Bandai no domingo"
 };
 
 // Aviso fixo do roteiro
@@ -167,9 +167,7 @@ const DAYS = [
           "Reserve antes em eurostar.com (~£60–100/pessoa ida; mais barato quanto antes).",
           "Passaporte obrigatório. ETA não vale para a França — brasileiros não precisam de visto (90 dias Schengen)."] },
       { name: "Paris Gare du Nord", type: "transporte", coords: [48.8809, 2.3553], area: "Paris",
-        desc: "Chegada ~meio-dia. Ao hotel: L4 até Montparnasse-Bienvenüe → troca L12 → Vaugirard (~30 min)." },
-      { name: "Novotel Paris Vaugirard Montparnasse", type: "hotel", coords: [48.8411, 2.3033], area: "257 rue de Vaugirard (15e) · M Vaugirard (L12)",
-        desc: ["Hotel base em Paris — 2 noites (terça 7 → quinta 9).", "Deixem as mochilas e façam check-in se o quarto estiver pronto.", "A L12 conecta direto: Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre)."] },
+        desc: "Chegada ~meio-dia. Ao hotel (zona Montparnasse): L4 até Montparnasse-Bienvenüe → troca L12 (~30 min). Deixem as mochilas e sigam ao passeio." },
       { name: "Au Plat d'Étain", type: "loja", coords: [48.8527, 2.3340], area: "Saint-Germain (Paris 6e)",
         desc: ["16, rue Guisarde · Ter–Sáb 10h30–17h ⏰ cheguem antes das 17h.",
           "Loja de figurines de coleção desde 1775 — soldados históricos, Astérix & Obélix, pintados à mão.",
@@ -185,7 +183,7 @@ const DAYS = [
       { name: "Fête des Tuileries", type: "parque", coords: [48.8634, 2.3275], area: "Jardin des Tuileries (1er)",
         price: "Entrada grátis (paga só os brinquedos)", desc: ["Parque de diversões de verão (20/jun–23/ago 2026, todos os dias 11h–23h30).", "A 'noite mágica' do filho: roda-gigante com vista de Paris ao entardecer.", "Escurece ~21h30 no verão — dá tempo de jantar e curtir a roda iluminada."] }
     ],
-    tips: ["Volta ao hotel: de Concorde, L12 direto até Vaugirard.", "Au Plat d'Étain fecha às 17h — encaixe com folga."]
+    tips: ["A L12 conecta o hotel direto a Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre).", "Volta ao hotel à noite: de Concorde, L12 direto.", "Au Plat d'Étain fecha às 17h — encaixe com folga."]
   },
 
   /* ---------------------- DIA 6 ---------------------- */
@@ -195,7 +193,7 @@ const DAYS = [
     summary: "Invalides e Rodin por fora, Torre Eiffel às 10h, Arco do Triunfo e Montmartre ao pôr do sol.",
     places: [
       { name: "Musée Rodin", type: "museu", coords: [48.8553, 2.3158], area: "Paris 7e",
-        price: "Só jardim ~€5 (grátis < 18) — ou ver por fora", desc: ["Só por fora: dá para ver 'O Pensador' e o jardim pela grade.", "Do Novotel: L12 direto até Solférino (sem troca) → ~10 min a pé."] },
+        price: "Só jardim ~€5 (grátis < 18) — ou ver por fora", desc: ["Só por fora: dá para ver 'O Pensador' e o jardim pela grade.", "Do hotel (L12): direto até Solférino (sem troca) → ~10 min a pé."] },
       { name: "Les Invalides", type: "atracao", coords: [48.8566, 2.3126], area: "Paris 7e",
         desc: ["Por fora: o domo dourado (Túmulo de Napoleão) é uma das silhuetas mais bonitas de Paris.", "Coladinho ao Rodin; a esplanada já vale a passada."] },
       { name: "Torre Eiffel", type: "atracao", coords: [48.8584, 2.2945], area: "Paris 7e",
@@ -211,7 +209,7 @@ const DAYS = [
       { name: "Espace Dalí", type: "museu", coords: [48.8862, 2.3389], area: "Montmartre",
         desc: "Opcional indoor: esculturas surreais e relógios derretendo — a melhor parada de Montmartre para criança." }
     ],
-    tips: ["Dormir no Novotel Vaugirard (de Montmartre, L12 Abbesses/Pigalle → Vaugirard, direto).", "Jantar em Abbesses (bons bistrôs) ou de volta ao centro."]
+    tips: ["Volta ao hotel: de Montmartre, L12 (Abbesses/Pigalle) direto.", "Jantar em Abbesses (bons bistrôs) ou de volta ao centro."]
   },
 
   /* ---------------------- DIA 7 ---------------------- */
@@ -221,7 +219,7 @@ const DAYS = [
     summary: "Louvre às 10h30 com a manhã inteira, almoço no Marais, Eurostar de volta ~18h.",
     places: [
       { name: "Museu do Louvre", type: "museu", coords: [48.8606, 2.3376], area: "Paris 1er",
-        price: "~€22 adulto / grátis < 18 — INGRESSO 10h30 (comprar online)", desc: ["Checkout no Novotel de manhã; mochilas no vestiaire gratuito do Louvre.",
+        price: "~€22 adulto / grátis < 18 — INGRESSO 10h30 (comprar online)", desc: ["Checkout no hotel de manhã; mochilas no vestiaire gratuito do Louvre.",
           "Manhã inteira (~3–3h30, até ~14h) — visita tranquila. Entrem pela pirâmide menor (Carrousel du Louvre).",
           "Pular: antiguidades egípcias e gregas menores (já vistas no British)."],
         highlights: [
@@ -235,7 +233,7 @@ const DAYS = [
         desc: "Almoço: falafel famoso e barato, ou boulangerie. Depois, tarde leve (Jardin des Tuileries / Marais) perto do centro." },
       { name: "Paris Gare du Nord", type: "transporte", coords: [48.8809, 2.3553], area: "Paris",
         desc: ["Eurostar de volta ~18h → chegada London St Pancras ~19h15.", "Estejam na Gare du Nord ~17h (check-in fecha ~30–45 min antes)."] },
-      { name: "Chegada Londres → hotel (Park Plaza County Hall)", type: "transporte", coords: [51.5320, -0.1263], area: "King's Cross St Pancras",
+      { name: "Chegada Londres → hotel (South Bank)", type: "transporte", coords: [51.5320, -0.1263], area: "King's Cross St Pancras",
         desc: ["Sem troca de linha: Circle line (sentido Tower Hill) → Westminster → atravessar a Westminster Bridge a pé (~10 min).", "Com bagagem, táxi/Uber St Pancras → County Hall (~15–20 min, ~£15–20) é cômodo."] }
     ],
     tips: ["Jantar tranquilo no South Bank, perto do hotel — amanhã Greenwich!"]

@@ -1,5 +1,5 @@
 /* Service Worker — Londres + Paris guia offline */
-const APP = "lp-app-v6";       // app shell (bump version to force update)
+const APP = "lp-app-v7";       // app shell (bump version to force update)
 const TILES = "lp-tiles-v1";   // map tiles (kept across app updates)
 
 const SHELL = [
@@ -7,6 +7,8 @@ const SHELL = [
   "index.html",
   "app.js",
   "data.js",
+  "metro.js",
+  "metro-data.js",
   "manifest.webmanifest",
   "vendor/leaflet.css",
   "vendor/leaflet.js",
@@ -34,7 +36,7 @@ self.addEventListener("activate", e => {
 });
 
 // Content that changes when the roteiro is updated -> always try network first.
-const FRESH = /(^\/$|\/$|index\.html$|app\.js$|data\.js$|manifest\.webmanifest$)/;
+const FRESH = /(^\/$|\/$|index\.html$|app\.js$|data\.js$|metro\.js$|metro-data\.js$|manifest\.webmanifest$)/;
 
 self.addEventListener("fetch", e => {
   const req = e.request;
