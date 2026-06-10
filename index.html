@@ -78,6 +78,12 @@
     border:1px solid #5a4420;padding:1px 7px;border-radius:8px;margin-top:5px}
   .mapbtn{flex-shrink:0;font-size:11px;color:var(--accent);background:var(--bg2);
     border:1px solid var(--line);padding:5px 9px;border-radius:9px;cursor:pointer}
+  .thumb{flex:none;width:60px;height:60px;border-radius:10px;background:var(--bg2);
+    background-size:cover;background-position:center;border:1px solid var(--line);
+    overflow:hidden;position:relative}
+  .thumb.loading{animation:thpulse 1.2s ease-in-out infinite}
+  .thumb.empty{display:none}
+  @keyframes thpulse{0%,100%{opacity:.45}50%{opacity:.8}}
   .desc{margin:8px 0 0;padding:0}
   .desc li{margin:4px 0 4px 18px;font-size:13px;color:#cfd8e3}
   .desc.solo{list-style:none;margin-left:0;font-size:13px;color:#cfd8e3}

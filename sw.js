@@ -1,6 +1,7 @@
 /* Service Worker — Londres + Paris guia offline */
-const APP = "lp-app-v9";       // app shell (bump version to force update)
+const APP = "lp-app-v10";      // app shell (bump version to force update)
 const TILES = "lp-tiles-v1";   // map tiles (kept across app updates)
+const PHOTOS = "lp-photos-v1"; // fotos da Wikipédia (kept across app updates)
 
 const SHELL = [
   "./",
@@ -30,7 +31,7 @@ self.addEventListener("install", e => {
 self.addEventListener("activate", e => {
   e.waitUntil(
     caches.keys().then(keys => Promise.all(
-      keys.filter(k => k !== APP && k !== TILES).map(k => caches.delete(k))
+      keys.filter(k => k !== APP && k !== TILES && k !== PHOTOS).map(k => caches.delete(k))
     )).then(() => self.clients.claim())
   );
 });
@@ -47,6 +48,23 @@ self.addEventListener("fetch", e => {
   if (url.hostname.endsWith("tile.openstreetmap.org")) {
     e.respondWith(
       caches.open(TILES).then(async cache => {
+        const hit = await cache.match(req);
+        if (hit) return hit;
+        try {
+          const res = await fetch(req);
+          if (res && res.ok) cache.put(req, res.clone());
+          return res;
+        } catch (err) { return hit || Response.error(); }
+      })
+    );
+    return;
+  }
+
+  // Fotos da Wikipédia (miniaturas + API REST de resumo): cache-first, cache dedicado.
+  if (url.hostname.endsWith("wikimedia.org") ||
+      (url.hostname.endsWith("wikipedia.org") && url.pathname.includes("/api/rest_v1/page/summary/"))) {
+    e.respondWith(
+      caches.open(PHOTOS).then(async cache => {
         const hit = await cache.match(req);
         if (hit) return hit;
         try {

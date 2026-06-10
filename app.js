@@ -14,6 +14,73 @@ const TYPE = {
   hotel:       { c: "var(--t-hotel)",       e: "🏨", l: "Hotel" }
 };
 const tcol = t => `var(--t-${t})`;
+
+/* ---------- fotos (Wikipédia) ----------
+   Mapa nome-do-lugar -> título do artigo na Wikipédia (en).
+   O app busca a miniatura em tempo de execução e guarda em cache
+   (localStorage + Service Worker), então funciona offline depois da 1ª vez. */
+const WIKI = {
+  "Hotel Londres — Park Plaza County Hall": "County Hall, London",
+  "British Museum": "British Museum",
+  "Covent Garden": "Covent Garden",
+  "Leicester Square": "Leicester Square",
+  "Trafalgar Square": "Trafalgar Square",
+  "National Gallery": "National Gallery",
+  "Piccadilly Circus": "Piccadilly Circus",
+  "Chinatown": "Chinatown, London",
+  "Natural History Museum": "Natural History Museum, London",
+  "Science Museum": "Science Museum, London",
+  "Hyde Park": "Hyde Park, London",
+  "Serpentine Gallery": "Serpentine Galleries",
+  "Speaker's Corner": "Speakers' Corner",
+  "Kensington High Street": "Kensington High Street",
+  "Tower of London": "Tower of London",
+  "Tower Bridge": "Tower Bridge",
+  "Borough Market": "Borough Market",
+  "Tate Modern": "Tate Modern",
+  "Shakespeare's Globe": "Shakespeare's Globe",
+  "Millennium Bridge": "Millennium Bridge, London",
+  "London St Pancras International": "St Pancras railway station",
+  "Paris Gare du Nord": "Gare du Nord",
+  "Café Les Deux Magots": "Les Deux Magots",
+  "Les Deux Magots": "Les Deux Magots",
+  "Notre-Dame de Paris": "Notre-Dame de Paris",
+  "Pont Neuf": "Pont Neuf",
+  "Shakespeare & Company": "Shakespeare and Company (bookstore)",
+  "Grande Mosquée de Paris": "Grand Mosque of Paris",
+  "Jardin du Luxembourg": "Luxembourg Garden",
+  "Fête des Tuileries": "Tuileries Garden",
+  "Bouillon Chartier": "Bouillon Chartier",
+  "Bouillon Chartier Montparnasse": "Bouillon Chartier",
+  "Musée Rodin": "Musée Rodin",
+  "Les Invalides": "Les Invalides",
+  "Torre Eiffel": "Eiffel Tower",
+  "Champ de Mars": "Champ de Mars",
+  "Arco do Triunfo": "Arc de Triomphe",
+  "Basilique du Sacré-Cœur": "Sacré-Cœur, Paris",
+  "Place du Tertre": "Place du Tertre",
+  "Espace Dalí": "Dalí Paris",
+  "Museu do Louvre": "Louvre",
+  "Le Marais (Rue des Rosiers)": "Le Marais",
+  "Cutty Sark": "Cutty Sark",
+  "National Maritime Museum": "National Maritime Museum",
+  "Queen's House": "Queen's House",
+  "Greenwich Market": "Greenwich Market",
+  "Royal Observatory de Greenwich": "Royal Observatory, Greenwich",
+  "Paddington Station": "London Paddington station",
+  "Christ Church College": "Christ Church, Oxford",
+  "Radcliffe Camera": "Radcliffe Camera",
+  "Bodleian Library": "Bodleian Library",
+  "Sheldonian Theatre": "Sheldonian Theatre",
+  "Covered Market de Oxford": "Oxford Covered Market",
+  "Ashmolean Museum": "Ashmolean Museum",
+  "University Parks": "University Parks",
+  "The Shard (The View)": "The Shard",
+  "Sky Garden": "20 Fenchurch Street",
+  "Camden Market": "Camden Market",
+  "King's Cross — Plataforma 9¾": "King's Cross railway station",
+  "Heathrow Airport": "Heathrow Airport"
+};
 const esc = s => String(s).replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
 
 /* ---------- header ---------- */
@@ -52,6 +119,8 @@ function placeHtml(p, dayId, idx) {
         (h.where ? `<span class="w">${esc(h.where)}</span>` : "") +
         (h.note ? `<span class="n">${esc(h.note)}</span>` : "") + `</div>`).join("") + `</div>`;
   }
+  const wt = WIKI[p.name];
+  const thumb = wt ? `<div class="thumb loading" data-wiki="${esc(wt)}"></div>` : "";
   return `<div class="place">
     <div class="place-h">
       <div class="pin" style="background:${tcol(p.type)}22;color:${tcol(p.type)}">${t.e}</div>
@@ -60,6 +129,7 @@ function placeHtml(p, dayId, idx) {
         <div class="meta">${esc(meta)}</div>
         ${p.price ? `<div class="price">${esc(p.price)}</div>` : ""}
       </div>
+      ${thumb}
       ${hasCoord ? `<button class="mapbtn" onclick="goMap(${dayId},${idx})">Mapa</button>` : ""}
     </div>
     ${descHtml(p.desc)}
@@ -85,6 +155,43 @@ function renderDays() {
 }
 renderDays();
 document.getElementById("day-1").classList.add("open");
+
+/* ---------- fotos: hidratar miniaturas da Wikipédia ---------- */
+const THUMB_KEY = "lp_wikithumb_v2";
+const loadThumbCache = () => { try { return JSON.parse(localStorage.getItem(THUMB_KEY)) || {}; } catch (e) { return {}; } };
+const saveThumbCache = o => { try { localStorage.setItem(THUMB_KEY, JSON.stringify(o)); } catch (e) {} };
+function applyThumb(el, url) {
+  el.classList.remove("loading");
+  if (url) {
+    const img = new Image();
+    img.onload = () => { el.style.backgroundImage = `url("${url}")`; };
+    img.onerror = () => { el.classList.add("empty"); };
+    img.src = url;
+  } else {
+    el.classList.add("empty");
+  }
+}
+async function hydrateThumbs() {
+  const cache = loadThumbCache();
+  const els = [...document.querySelectorAll(".thumb[data-wiki]")];
+  // aplica o que já está em cache na hora (funciona offline)
+  els.forEach(el => { const t = el.getAttribute("data-wiki"); if (t in cache) applyThumb(el, cache[t]); });
+  // busca os que faltam (precisa de internet só na 1ª vez)
+  for (const el of els) {
+    const title = el.getAttribute("data-wiki");
+    if (title in cache) continue;
+    try {
+      const r = await fetch("https://en.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title), { headers: { Accept: "application/json" } });
+      let url = null;
+      if (r.ok) { const j = await r.json(); url = (j.thumbnail && j.thumbnail.source) || (j.originalimage && j.originalimage.source) || null; }
+      cache[title] = url; saveThumbCache(cache);
+      applyThumb(el, url);
+    } catch (e) {
+      applyThumb(el, null); // offline e sem cache: esconde a miniatura
+    }
+  }
+}
+hydrateThumbs();
 
 /* ---------- render: Prático ---------- */
 const CK_KEY = "lp_checklist_v1";
