@@ -22,7 +22,7 @@ const META = {
 };
 
 // Aviso fixo do roteiro
-const AVISO = "✅ Já comprados: Eurostar (ida/volta), Torre Eiffel e Louvre. Falta confirmar o ingresso da Tower of London (esgota rápido em julho — compre online).";
+const AVISO = "✅ Já comprados: Eurostar (ida/volta), Torre Eiffel e Louvre. (Tower of London ficou opcional.)";
 
 const DAYS = [
   /* ---------------------- DIA 1 ---------------------- */
@@ -334,6 +334,36 @@ const DAYS = [
   }
 ];
 
+/* -------------------- RESTAURANTES / ONDE COMER --------------------
+   Sempre com opção pensando na criança de 12 anos.
+   wiki = título do artigo na Wikipédia (foto); deixe "" se não houver. */
+const RESTAURANTES = [
+  { name: "The George Inn", city: "Londres", area: "Borough · South Bank (Dia 1)", cuisine: "Pub britânico",
+    avg: "~£14–18/prato", kids: "Fish & chips, bangers & mash, salsicha com purê — clássicos que criança adora.", wiki: "George Inn, Southwark" },
+  { name: "Four Seasons", city: "Londres", area: "Chinatown (Dia 2)", cuisine: "Cantonês / pato assado",
+    avg: "~£10–16/prato", kids: "Pato assado, arroz frito, noodles, frango xadrez — sabores familiares.", wiki: "" },
+  { name: "Beijing Dumpling", city: "Londres", area: "Chinatown (Dia 2)", cuisine: "Dim sum / dumplings",
+    avg: "~£5–9/porção", kids: "Guiozas, xiao long bao e pãezinhos cozidos — divertido de comer com a mão.", wiki: "" },
+  { name: "Wagamama", city: "Londres", area: "Kensington High St (Dia 4)", cuisine: "Asiático (ramen/katsu)",
+    avg: "~£12–16/prato", kids: "Tem MENU INFANTIL próprio: mini ramen, katsu de frango, suco. Ótimo custo-benefício.", wiki: "" },
+  { name: "Borough Market", city: "Londres", area: "London Bridge (Dia 10)", cuisine: "Mercado gastronômico",
+    avg: "~£6–12/porção", kids: "Enorme variedade: pão fresco, queijos, brownies, hambúrguer, comida do mundo.", wiki: "Borough Market" },
+  { name: "Greenwich Market", city: "Londres", area: "Greenwich (Dia 8)", cuisine: "Mercado / street food",
+    avg: "~£6–10/porção", kids: "Crepes, hambúrguer, doces e comida de rua — escolhe-se na hora.", wiki: "Greenwich Market" },
+  { name: "Oxford Covered Market", city: "Oxford", area: "Oxford (Dia 9)", cuisine: "Mercado histórico",
+    avg: "~£5–10/porção", kids: "Sanduíches, tortas e o sorvete do G&D's — instituição oxfordiana.", wiki: "Oxford Covered Market" },
+  { name: "Bouillon Chartier Montparnasse", city: "Paris", area: "Montparnasse (Dia 5 · jantar)", cuisine: "Bistrô francês clássico",
+    avg: "~€12–15/prato", kids: "Steak-frites, frango assado, purê e profiteroles. Barato e animado.", wiki: "Bouillon Chartier" },
+  { name: "Crêperies de Montparnasse", city: "Paris", area: "Rue du Montparnasse (Dia 5)", cuisine: "Crêpes & galettes bretãs",
+    avg: "~€8–12", kids: "Galette de presunto-queijo + crêpe de Nutella/açúcar. Quase sempre agrada.", wiki: "" },
+  { name: "Café Les Deux Magots", city: "Paris", area: "Saint-Germain (Dia 5)", cuisine: "Café histórico francês",
+    avg: "Café ~€7–9 · pratos €20+", kids: "Vão pela experiência: chocolate quente + croque-monsieur. Refeição completa é cara.", wiki: "Les Deux Magots" },
+  { name: "L'As du Fallafel", city: "Paris", area: "Le Marais, Rue des Rosiers (Dia 7)", cuisine: "Oriente Médio / falafel",
+    avg: "~€8–10/sanduíche", kids: "Falafel no pão + batata frita; opção de shawarma de frango. Famoso e barato.", wiki: "" },
+  { name: "Piquenique no Champ de Mars", city: "Paris", area: "Em frente à Torre Eiffel (Dia 6 · almoço)", cuisine: "Boulangerie / piquenique",
+    avg: "~€4–8/pessoa", kids: "Monte com baguete, queijo, presunto, frutas e croissant — comer na grama é parte da diversão.", wiki: "" }
+];
+
 /* -------------------- INFO PRÁTICA -------------------- */
 const PRATICO = {
   custos: {
@@ -367,7 +397,6 @@ const PRATICO = {
     titulo: "⚠️ Lembretes críticos",
     itens: [
       "✅ Já comprados: Eurostar ida (7/jul 10h30) e volta (9/jul 16h12), Torre Eiffel (8/jul 10h), Louvre (9/jul 10h30).",
-      "Tower of London: confirme se já comprou o ingresso online — ainda falta nesta lista.",
       "Brasileiros na França: livre de visto até 90 dias (Schengen) — só passaporte.",
       "Transporte Paris: Navigo Easy card ou contactless (metrô + RER).",
       "Seguro viagem: confirme que cobre também a França."

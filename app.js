@@ -272,6 +272,30 @@ function vsDetailHtml(p) {
   return thumb + (p.price ? `<div class="vs-price">${esc(p.price)}</div>` : "") + descHtml(p.desc) + hl;
 }
 
+function vsRestHtml() {
+  const list = (typeof RESTAURANTES !== "undefined") ? RESTAURANTES : [];
+  if (!list.length) return "";
+  const seen = loadSeen();
+  const rows = list.map((r, idx) => {
+    const key = "r-" + idx, on = !!seen[key];
+    const thumb = r.wiki ? `<div class="thumb loading" data-wiki="${esc(r.wiki)}"></div>` : "";
+    return `<div class="vs-ritem${on ? " done" : ""}" data-key="${key}">
+      <div class="vs-row">
+        <div class="vs-cap" data-act="check">${on ? "✓" : ""}</div>
+        <div class="vs-pin">🍽️</div>
+        <div class="vs-tx" data-act="toggle">
+          <div class="vs-nm">${esc(r.name)}<span class="vs-city">${esc(r.city)}</span></div>
+          <div class="vs-mt"><span class="vs-cuis">${esc(r.cuisine)}</span> · <span class="vs-avg">${esc(r.avg)}</span></div>
+          <div class="vs-kids">🧒 ${esc(r.kids)}</div>
+        </div>
+        <div class="vs-arrow" data-act="toggle">▶</div>
+      </div>
+      <div class="vs-det">${thumb}<div class="desc solo">${esc(r.area)}</div></div>
+    </div>`;
+  }).join("");
+  return `<div class="vs-day">🍽️ Restaurantes & onde comer · sempre com opção p/ criança</div>` + rows;
+}
+
 function renderVistos() {
   const root = document.getElementById("vistos");
   const seen = loadSeen();
@@ -308,7 +332,7 @@ function renderVistos() {
         <button class="vs-reset" id="vsReset">Limpar</button>
       </div>
       <div class="vs-hint">Toque no quadradinho para marcar como visto · na seta ▶ para ver os detalhes do local.</div>
-    </div>` + body;
+    </div>` + vsRestHtml() + body;
   wireVistos();
   hydrateThumbs();
 }
@@ -322,7 +346,7 @@ function vsUpdateCount() {
 }
 
 function wireVistos() {
-  document.querySelectorAll("#vistos .vs-item").forEach(item => {
+  document.querySelectorAll("#vistos .vs-item, #vistos .vs-ritem").forEach(item => {
     const key = item.dataset.key;
     item.querySelector('[data-act="check"]').addEventListener("click", e => {
       e.stopPropagation();

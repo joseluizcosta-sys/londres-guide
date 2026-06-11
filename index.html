@@ -87,20 +87,24 @@
   .vs-reset{font-size:11px;color:var(--muted);background:var(--bg2);border:1px solid var(--line);padding:5px 9px;border-radius:9px;cursor:pointer;white-space:nowrap}
   .vs-hint{font-size:11.5px;color:var(--muted);margin-top:5px}
   .vs-day{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.4px;margin:14px 0 4px}
-  .vs-item{border-top:1px solid var(--line)}
+  .vs-item,.vs-ritem{border-top:1px solid var(--line)}
   .vs-row{display:flex;align-items:center;gap:10px;padding:9px 0;cursor:pointer}
   .vs-cap{flex:none;width:24px;height:24px;border-radius:7px;border:2px solid var(--line);background:var(--bg2);
     display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;cursor:pointer}
-  .vs-item.done .vs-cap{background:var(--accent);border-color:var(--accent)}
+  .vs-item.done .vs-cap,.vs-ritem.done .vs-cap{background:var(--accent);border-color:var(--accent)}
   .vs-pin{flex:none;font-size:15px}
   .vs-tx{flex:1;min-width:0}
   .vs-nm{font-weight:600;font-size:14px}
-  .vs-mt{font-size:11px;color:var(--muted);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .vs-item.done .vs-nm{text-decoration:line-through;color:var(--muted)}
+  .vs-city{font-weight:400;font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:0 5px;margin-left:4px}
+  .vs-mt{font-size:11.5px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .vs-cuis{color:#cfd8e3;font-weight:600}
+  .vs-avg{color:var(--gold);font-weight:600}
+  .vs-kids{font-size:11.5px;color:#bfe3c4;margin-top:2px}
+  .vs-item.done .vs-nm,.vs-ritem.done .vs-nm{text-decoration:line-through;color:var(--muted)}
   .vs-arrow{flex:none;font-size:12px;color:var(--muted);transition:transform .2s;padding:4px}
-  .vs-item.open .vs-arrow{transform:rotate(90deg)}
+  .vs-item.open .vs-arrow,.vs-ritem.open .vs-arrow{transform:rotate(90deg)}
   .vs-det{display:none;padding:2px 0 12px 34px}
-  .vs-item.open .vs-det{display:block}
+  .vs-item.open .vs-det,.vs-ritem.open .vs-det{display:block}
   .vs-det .thumb{width:100%;height:130px;margin-bottom:8px}
   .vs-price{display:inline-block;font-size:11px;color:#ffd9a0;background:#3a2a12;border:1px solid #5a4420;padding:1px 7px;border-radius:8px;margin-bottom:6px}
   .thumb{flex:none;width:60px;height:60px;border-radius:10px;background:var(--bg2);
