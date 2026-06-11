@@ -18,7 +18,7 @@
 const META = {
   title: "Londres + Paris",
   subtitle: "3 – 12 de Julho de 2026",
-  updated: "10/06/2026 — V4: Londres reorganizada (museus na 2ª · Camden+Bandai+Shard no dom 5 · Troca da Guarda · London Eye chegada · Tower opcional) + Paris (Les Deux Magots, Luxembourg, Bouillon Chartier) + fotos da Wikipédia"
+  updated: "11/06/2026 — Dia 2 (West End): roteiro de compras Piccadilly → Regent St → Oxford St (Fortnum & Mason, Hamleys, Liberty, Selfridges, Primark + Apple, Lego, livrarias)"
 };
 
 // Aviso fixo do roteiro
@@ -86,7 +86,32 @@ const DAYS = [
           { name: "Van Gogh — Girassóis", where: "Sala 43", note: "Conte a história do artista (cortou a orelha, morreu pobre, hoje vale £80M+) e vira narrativa." }
         ] },
       { name: "Piccadilly Circus", type: "atracao", coords: [51.5101, -0.1340], area: "West End",
-        desc: "Para sentir o pulso da cidade." },
+        desc: ["Para sentir o pulso da cidade.",
+          "🛍️ Ponto de partida do eixo de compras a pé: Piccadilly → Regent St → Oxford St (~1,5 km, tudo em sequência)."] },
+      { name: "Fortnum & Mason", type: "loja", coords: [51.5089, -0.1383], area: "181 Piccadilly",
+        price: "Entrada gratuita · Sáb ~10h–20h", desc: ["🏛️ Loja de departamentos de luxo fundada em 1707, a 'despensa da Rainha'. Vale entrar mesmo sem gastar.",
+          "O piso de alimentos é um espetáculo (chás, biscoitos, geleias, chocolates em latas lindas) — ótimo para presentes baratos e icônicos.",
+          "Repare no relógio da fachada com bonecos que se movem a cada hora."] },
+      { name: "Hatchards", type: "loja", coords: [51.5087, -0.1379], area: "187 Piccadilly (ao lado da Fortnum)",
+        price: "Entrada gratuita", desc: "📚 A livraria mais antiga de Londres (1797). Vale a parada rápida para os amantes de livros." },
+      { name: "Waterstones Piccadilly", type: "loja", coords: [51.5085, -0.1378], area: "203–206 Piccadilly",
+        price: "Entrada gratuita", desc: "📖 Maior livraria da Europa; café no topo com vista. Boa para uma pausa." },
+      { name: "Hamleys", type: "loja", coords: [51.5128, -0.1402], area: "188–196 Regent St",
+        price: "Entrada gratuita · Sáb ~10h–21h", desc: ["🎁 A maior e mais antiga loja de brinquedos do mundo (desde 1760): 7 andares com demonstrações ao vivo, Lego, Harry Potter, Pokémon.",
+          "Imperdível para o filho mesmo aos 13 anos — vale pela experiência."] },
+      { name: "Liberty London", type: "loja", coords: [51.5138, -0.1409], area: "Regent St (entrada na Great Marlborough St)",
+        price: "Entrada gratuita · Sáb ~10h–20h", desc: ["🎨 Prédio Tudor revival (1924) construído com madeira de navios de guerra — a arquitetura por dentro é um cartão-postal.",
+          "Tecidos, papelaria e design. Vale por cultura/arquitetura mesmo sem comprar."] },
+      { name: "Apple Regent Street", type: "loja", coords: [51.5151, -0.1413], area: "235 Regent St",
+        price: "Entrada gratuita", desc: "🍎 Loja em prédio histórico — ótima para os fãs de tecnologia, a caminho da Oxford St." },
+      { name: "Selfridges", type: "loja", coords: [51.5145, -0.1526], area: "400 Oxford St",
+        price: "Entrada gratuita · Sáb ~10h–21h", desc: ["🏬 Segunda maior loja de departamentos do UK, fachada icônica e vitrines criativas.",
+          "Food hall no subsolo. Bom para passear; preços altos, mas o ambiente vale."] },
+      { name: "Primark Oxford Street (Marble Arch)", type: "loja", coords: [51.5141, -0.1573], area: "499–517 Oxford St (flagship)",
+        price: "Sáb ~9h–21h", desc: ["🛒 Moda muito barata para a família reabastecer (camisetas, meias, básicos, malas).",
+          "Há também uma loja menor em Tottenham Court Rd. Vá com lista para não perder tempo."] },
+      { name: "Lego Store Leicester Square", type: "loja", coords: [51.5108, -0.1300], area: "Leicester Square",
+        price: "Entrada gratuita", desc: "🧱 A maior loja Lego do mundo — perto de Leicester Sq, onde a família já estará à tarde." },
       { name: "Twinings — loja histórica", type: "loja", coords: [51.5134, -0.1131], area: "216 Strand (~5 min de Trafalgar)",
         price: "Entrada gratuita · Sáb 10h–17h", desc: ["🫖 A loja de chá mais antiga de Londres (desde 1706), na mesma vitrine estreita de 300 anos — repare nos dois leões e na figura chinesa na fachada.",
           "Barra de degustação (provam chás de graça no fundo) + mini-museu com a história do chá.",
