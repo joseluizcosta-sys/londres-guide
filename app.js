@@ -32,6 +32,7 @@ const WIKI = {
   "Trafalgar Square": "Trafalgar Square",
   "National Gallery": "National Gallery",
   "Piccadilly Circus": "Piccadilly Circus",
+  "Twinings — loja histórica": "Twinings",
   "Chinatown": "Chinatown, London",
   "Natural History Museum": "Natural History Museum, London",
   "Science Museum": "Science Museum, London",
