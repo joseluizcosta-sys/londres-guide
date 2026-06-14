@@ -18,7 +18,7 @@
 const META = {
   title: "Londres + Paris",
   subtitle: "3 – 12 de Julho de 2026",
-  updated: "11/06/2026 — Dia 2 (West End): roteiro de compras Piccadilly → Regent St → Oxford St (Fortnum & Mason, Hamleys, Liberty, Selfridges, Primark + Apple, Lego, livrarias)"
+  updated: "14/06/2026 — Dia 9 (Oxford): dicas do vídeo — torre da St Mary's (melhor vista), Merton St, Magdalen/punting; transporte com advance singles (~£6–14/trecho) + tarifa child"
 };
 
 // Aviso fixo do roteiro
@@ -316,14 +316,18 @@ const DAYS = [
   {
     id: 9, date: "11 jul", weekday: "Sábado", city: "Oxford", emoji: "🎓",
     title: "Oxford",
-    summary: "Dia inteiro em Oxford — trem de Paddington (~1h, ~£25–35 ida e volta).",
+    summary: "Dia inteiro em Oxford — trem de Paddington (~50–60 min). Compre advance singles antecipados (~£6–14/trecho) p/ economizar.",
     places: [
       { name: "Paddington Station", type: "transporte", coords: [51.5154, -0.1755], area: "Londres",
-        desc: "Trem para Oxford (~1h, ~£25–35 ida e volta)." },
+        desc: ["Trem para Oxford (~50–60 min).", "💷 Compre advance singles antecipados (gwr.com / thetrainline): ~£6–14/trecho vs ~£25–35 na hora. Sábado é off-peak o dia todo.", "Filho (13) paga tarifa child (5–15). Alternativa barata: ônibus Oxford Tube/National Express de Victoria (~£16–20 ida/volta, ~1h40)."] },
       { name: "Christ Church College", type: "atracao", coords: [51.7505, -1.2557], area: "Oxford",
         price: "~£18 (online economiza ~£2)", desc: ["O college mais famoso; o refeitório (Great Hall) inspirou o de Hogwarts.", "⚠️ Sábado: o Great Hall fecha das 10h30 às 14h — cheguem antes das 10h30 ou depois das 14h para vê-lo.", "A catedral fecha 16h45 para o coro."] },
       { name: "Radcliffe Camera", type: "atracao", coords: [51.7536, -1.2540], area: "Oxford",
         desc: "Arquitetura medieval de tirar o fôlego." },
+      { name: "Torre da University Church of St Mary the Virgin", type: "atracao", coords: [51.7527, -1.2535], area: "Oxford",
+        price: "~£5–6", desc: "🆕 Dica do vídeo: 127 degraus até a melhor vista panorâmica de Oxford (Radcliffe Camera vista de cima e as 'dreaming spires'). Barato e a melhor foto do dia." },
+      { name: "Merton Street", type: "atracao", coords: [51.7511, -1.2517], area: "Oxford",
+        price: "Gratuito", desc: "🆕 Dica do vídeo: a rua de paralelepípedos medieval mais bonita de Oxford, ao lado do Christ Church/Merton. 5 min, ótima para fotos." },
       { name: "Bodleian Library", type: "atracao", coords: [51.7548, -1.2543], area: "Oxford",
         desc: "Uma das bibliotecas mais antigas da Europa." },
       { name: "Sheldonian Theatre", type: "atracao", coords: [51.7544, -1.2552], area: "Oxford",
@@ -332,6 +336,8 @@ const DAYS = [
         desc: "Almoço: sanduíches, tortas, café. Histórico e barato." },
       { name: "Ashmolean Museum", type: "museu", coords: [51.7556, -1.2603], area: "Oxford",
         price: "Gratuito", desc: "Museu de arte e arqueologia." },
+      { name: "Magdalen College + rio (opcional)", type: "atracao", coords: [51.7522, -1.2470], area: "Oxford",
+        price: "~£8", desc: "🆕 Dica do vídeo: deer park, Addison's Walk e a ponte do punting (passeio de barco a vara — pegue com barqueiro/chauffeured com criança). Escolha ENTRE isto e a tarde de museu/colleges — não cabem os dois." },
       { name: "University Parks", type: "parque", coords: [51.7605, -1.2520], area: "Oxford",
         desc: "Parque enorme, perfeito para descanso. Passeie pelos colleges (Merton, Balliol, New College)." },
       { name: "G&D's (sorvete)", type: "restaurante", coords: [51.7490, -1.2565], area: "Oxford",
@@ -339,6 +345,7 @@ const DAYS = [
     ],
     tips: [
       "💡 Para o filho: Oxford é onde estudaram Tolkien, C.S. Lewis, Stephen Hawking e Oscar Wilde. Ótima conversa durante o passeio.",
+      "💷 Reserve os trens advance singles assim que possível — o preço sobe perto da data.",
       "Retorno a Londres: trem à tarde, jantar de despedida em Londres."
     ]
   },

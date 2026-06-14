@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/joseluizscosta/.claude/**)",
+      "Read(//Users/joseluizscosta/**)",
+      "Bash(.venv/bin/python -)",
+      "Bash(claude mcp *)"
+    ]
+  }
+}
