@@ -188,7 +188,7 @@ const DAYS = [
           "Se quiserem mesmo assim (~3h): Jóias da Coroa e Beefeaters são o ponto alto. Encaixe num período livre (ex.: manhã do Dia 10).",
           "Por fora, a Tower Bridge e a muralha já valem a foto de graça."] }
     ],
-    tips: ["🏃 Treino: acordar 6h50 — Academia (Tronco+Core+MMII, 3 séries) na academia do hotel ou peso corporal no quarto, 7h05–7h55. Sobra tempo até a Guarda às 11h.",
+    tips: ["🏃 Treino (sessão dupla — a corrida migrou da terça pra cá): acordar 6h00. Corrida CCL 9 km leve no Tâmisa 6h15–7h05, depois força Tronco+Core+MMII (3 séries) 7h15–8h00. Sobra manhã até a Guarda às 11h.",
       "A Guarda só ocorre seg/qua/sex (quarta/sexta caem em Paris/Greenwich) — por isso ficou na segunda.",
       "Museus em dia útil = bem menos cheios que no domingo."]
   },
@@ -237,7 +237,7 @@ const DAYS = [
       { name: "Fête des Tuileries", type: "parque", coords: [48.8634, 2.3275], area: "Jardin des Tuileries (1er)",
         price: "Entrada grátis (paga só os brinquedos)", desc: ["Parque de diversões de verão (20/jun–23/ago 2026, todos os dias 11h–23h30).", "A 'noite mágica' do filho: roda-gigante com vista de Paris ao entardecer.", "Escurece ~21h30 no verão — dá tempo de jantar e curtir a roda iluminada.", "💡 Quem quiser jantar de street food no parque pode pular o Bouillon Chartier."] }
     ],
-    tips: ["🏃 Treino (opcional/dia de viagem): CCL 9 km leve. Se quiser, acordar 5h45 e correr 6h00–6h55 no Tâmisa antes do checkout. ⚠️ Eurostar 10h30 (St Pancras ~9h30) — se atrasar, encurte p/ 5–6 km ou pule. Não arrisque perder o trem.",
+    tips: ["🏃 Treino: DESCANSO (a corrida de 9 km passou para segunda). Dia de viagem — Eurostar 10h30, chegue tranquilo a St Pancras (~9h30).",
       "A L12 conecta o hotel direto a Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre).", "Volta ao hotel à noite: de Concorde, L12 direto.", "Tarde enxuta (chegada 13h45): priorize Les Deux Magots + Au Plat d'Étain (fecha 17h) + Luxembourg; Mosquée fica como opcional."]
   },
 
