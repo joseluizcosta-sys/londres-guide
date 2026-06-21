@@ -43,6 +43,7 @@ const DAYS = [
           "💡 Mais perto do hotel: The Understudy ou The Marquis of Wellington (South Bank) também são família-friendly."] }
     ],
     tips: [
+      "🏃 Treino: dia de chegada = descanso/mobilidade. 15 min de alongamento no quarto.",
       "Passeio leve pelo bairro para se orientar.",
       "Pub no Reino Unido: criança de 12 é bem-vinda em pub que serve comida, acompanhada, normalmente até ~21h.",
       "Compre um cartão Oyster no 1º dia (metrô/ônibus) ou use o cartão contactless direto — funciona igual.",
@@ -54,7 +55,7 @@ const DAYS = [
   {
     id: 2, date: "4 jul", weekday: "Sábado", city: "Londres", emoji: "🏛️",
     title: "British Museum + West End",
-    summary: "Manhã no British Museum, tarde em Covent Garden e West End, jantar em Chinatown.",
+    summary: "🏃 Acordar 6h00 (CCR 12 km moderado, Tâmisa) → British Museum, Covent Garden, West End e Chinatown.",
     places: [
       { name: "British Museum", type: "museu", coords: [51.5194, -0.1270], area: "Bloomsbury",
         price: "Gratuito", desc: ["Reserve 3–4h. Estratégia: foco em objetos que contam histórias — evita repetição com o Louvre (que vem depois).",
@@ -122,7 +123,7 @@ const DAYS = [
           "🥟 Beijing Dumpling ou Golden Dragon: para dim sum/guiozas, vários pratinhos para compartilhar.",
           "💡 Restaurante com patos na vitrine = bom assado. Chinatown é cheia de famílias chinesas — criança super bem-vinda."] }
     ],
-    tips: []
+    tips: ["🏃 Treino: acordar 6h00 — CCR 12 km moderado (Z2–Z3). Rota: South Bank → Tower Bridge → Battersea e volta (plana). Correr 6h20–7h35, banho e sair ~9h."]
   },
 
   /* ---------------------- DIA 3 ---------------------- */
@@ -145,7 +146,8 @@ const DAYS = [
       { name: "Sky Garden", type: "mirante", coords: [51.5113, -0.0837], area: "20 Fenchurch St",
         price: "Gratuito (reserva online antecipada)", desc: "💡 Alternativa grátis ao Shard: jardim no topo com vista. Esgota — reserve com semanas de antecedência." }
     ],
-    tips: ["Tarde leve: Regent's Canal em Camden (barcos, eclusas) ou descanso no hotel antes da noite.",
+    tips: ["🏃 Treino: acordar 7h30 — recuperação ativa, 25–30 min de trote leve/mobilidade no South Bank antes de Camden.",
+      "Tarde leve: Regent's Canal em Camden (barcos, eclusas) ou descanso no hotel antes da noite.",
       "Jantar: Borough Market / Hay's Galleria (South Bank, perto do Shard e do hotel)."]
   },
 
@@ -186,7 +188,8 @@ const DAYS = [
           "Se quiserem mesmo assim (~3h): Jóias da Coroa e Beefeaters são o ponto alto. Encaixe num período livre (ex.: manhã do Dia 10).",
           "Por fora, a Tower Bridge e a muralha já valem a foto de graça."] }
     ],
-    tips: ["A Guarda só ocorre seg/qua/sex (quarta/sexta caem em Paris/Greenwich) — por isso ficou na segunda.",
+    tips: ["🏃 Treino: acordar 6h50 — Academia (Tronco+Core+MMII, 3 séries) na academia do hotel ou peso corporal no quarto, 7h05–7h55. Sobra tempo até a Guarda às 11h.",
+      "A Guarda só ocorre seg/qua/sex (quarta/sexta caem em Paris/Greenwich) — por isso ficou na segunda.",
       "Museus em dia útil = bem menos cheios que no domingo."]
   },
 
@@ -234,7 +237,8 @@ const DAYS = [
       { name: "Fête des Tuileries", type: "parque", coords: [48.8634, 2.3275], area: "Jardin des Tuileries (1er)",
         price: "Entrada grátis (paga só os brinquedos)", desc: ["Parque de diversões de verão (20/jun–23/ago 2026, todos os dias 11h–23h30).", "A 'noite mágica' do filho: roda-gigante com vista de Paris ao entardecer.", "Escurece ~21h30 no verão — dá tempo de jantar e curtir a roda iluminada.", "💡 Quem quiser jantar de street food no parque pode pular o Bouillon Chartier."] }
     ],
-    tips: ["A L12 conecta o hotel direto a Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre).", "Volta ao hotel à noite: de Concorde, L12 direto.", "Tarde enxuta (chegada 13h45): priorize Les Deux Magots + Au Plat d'Étain (fecha 17h) + Luxembourg; Mosquée fica como opcional."]
+    tips: ["🏃 Treino (opcional/dia de viagem): CCL 9 km leve. Se quiser, acordar 5h45 e correr 6h00–6h55 no Tâmisa antes do checkout. ⚠️ Eurostar 10h30 (St Pancras ~9h30) — se atrasar, encurte p/ 5–6 km ou pule. Não arrisque perder o trem.",
+      "A L12 conecta o hotel direto a Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre).", "Volta ao hotel à noite: de Concorde, L12 direto.", "Tarde enxuta (chegada 13h45): priorize Les Deux Magots + Au Plat d'Étain (fecha 17h) + Luxembourg; Mosquée fica como opcional."]
   },
 
   /* ---------------------- DIA 6 ---------------------- */
@@ -260,7 +264,8 @@ const DAYS = [
       { name: "Espace Dalí", type: "museu", coords: [48.8862, 2.3389], area: "Montmartre",
         desc: "Opcional indoor: esculturas surreais e relógios derretendo — a melhor parada de Montmartre para criança." }
     ],
-    tips: ["Volta ao hotel: de Montmartre, L12 (Abbesses/Pigalle) direto.", "Jantar em Abbesses (bons bistrôs) ou de volta ao centro."]
+    tips: ["🏃 Treino: o plano marca natação? — sem piscina, troque por corrida leve. Acordar 6h30, ~35 min pela beira do Sena / Champ de Mars, antes da Torre às 10h.",
+      "Volta ao hotel: de Montmartre, L12 (Abbesses/Pigalle) direto.", "Jantar em Abbesses (bons bistrôs) ou de volta ao centro."]
   },
 
   /* ---------------------- DIA 7 ---------------------- */
@@ -287,14 +292,16 @@ const DAYS = [
       { name: "Chegada Londres → hotel (South Bank)", type: "transporte", coords: [51.5320, -0.1263], area: "King's Cross St Pancras",
         desc: ["Chegada ~17h27. Sem troca de linha: Circle line (sentido Tower Hill) → Westminster → atravessar a Westminster Bridge a pé (~10 min).", "Com bagagem, táxi/Uber St Pancras → County Hall (~15–20 min, ~£15–20) é cômodo."] }
     ],
-    tips: ["Jantar tranquilo no South Bank, perto do hotel — amanhã Greenwich!"]
+    tips: ["🏃 Treino (opcional/dia de viagem): CCL 8 km leve. Se acordar 6h15, correr 6h30–7h15 pela beira do Sena antes do checkout. Louvre 10h30 + Eurostar 16h12 — não atrase.",
+      "🎽 London 10K: se voltar do Eurostar a tempo (~17h27), dá para tentar retirar o bib na Saucony Store (Covent Garden, fecha 19h) — apertado. Senão, sexta 10 é a melhor janela.",
+      "Jantar tranquilo no South Bank, perto do hotel — amanhã Greenwich!"]
   },
 
   /* ---------------------- DIA 8 ---------------------- */
   {
     id: 8, date: "10 jul", weekday: "Sexta", city: "Londres", emoji: "⚓",
     title: "Greenwich",
-    summary: "Dia inteiro em Greenwich — vá de barco pelo Tâmisa (Thames Clipper).",
+    summary: "🏃 Acordar 6h45 (CCR 7 km leve) → dia inteiro em Greenwich de barco. 🎽 Na volta: retirar o bib da London 10K na Saucony Store (Covent Garden).",
     places: [
       { name: "Westminster Pier", type: "transporte", coords: [51.5009, -0.1226], area: "Westminster",
         desc: "💡 Pegue o Thames Clipper aqui até Greenwich — viagem pelo Tâmisa com vistas incríveis (~£10/pessoa)." },
@@ -309,7 +316,8 @@ const DAYS = [
       { name: "Royal Observatory de Greenwich", type: "atracao", coords: [51.4769, -0.0005], area: "Greenwich",
         price: "Planetário ~£10", desc: ["Onde fica o Meridiano de Greenwich (0° de longitude).", "Foto clássica com um pé em cada hemisfério 🌍.", "Vista panorâmica de Londres do alto da colina do parque."] }
     ],
-    tips: []
+    tips: ["🏃 Treino: acordar 6h45 — CCR 7 km leve, 7h00–7h45 no South Bank (ou corra no próprio Greenwich Park, lindo e ondulado).",
+      "🎽 London 10K: na volta de Greenwich, passe na Saucony Store (4 James St, Covent Garden, abre até 19h) para retirar o bib — melhor janela da semana. Leve foto + QR code."]
   },
 
   /* ---------------------- DIA 9 ---------------------- */
@@ -344,6 +352,8 @@ const DAYS = [
         desc: "Instituição oxfordiana — sorvete." }
     ],
     tips: [
+      "🏃 Treino: véspera da prova — taper. Faça só 15–20 min de trote leve OU descanse. Nada de esforço forte hoje.",
+      "🎽 Plano C do bib: se não retirou na sexta, e voltar cedo de Oxford, a Saucony Store abre sáb 10h–17h30 (fecha mais cedo!).",
       "💡 Para o filho: Oxford é onde estudaram Tolkien, C.S. Lewis, Stephen Hawking e Oscar Wilde. Ótima conversa durante o passeio.",
       "💷 Reserve os trens advance singles assim que possível — o preço sobe perto da data.",
       "Retorno a Londres: trem à tarde, jantar de despedida em Londres."
@@ -352,10 +362,15 @@ const DAYS = [
 
   /* ---------------------- DIA 10 ---------------------- */
   {
-    id: 10, date: "12 jul", weekday: "Domingo", city: "Londres", emoji: "✈️",
-    title: "Último dia (leve) → Partida",
-    summary: "Manhã leve no South Bank (Borough Market, Tate Modern), partida à noite.",
+    id: 10, date: "12 jul", weekday: "Domingo", city: "Londres", emoji: "🏅",
+    title: "London 10K → Partida",
+    summary: "🏅 London 10K às 9h30 (Piccadilly→Whitehall), depois South Bank leve e partida à noite.",
     places: [
+      { name: "🏅 London 10K — Largada (Piccadilly)", type: "atracao", coords: [51.5089, -0.1376], area: "Piccadilly · largada 9h30",
+        desc: ["Saucony London 10K — domingo 12/07, largada 9h30. Largada em Piccadilly, chegada em Whitehall (SW1A 2AS).",
+          "Bag drop + Help Desk: Waterloo Place, SW1Y 5ER — abre 7h45, fecha 13h00. Hotel→largada ~20–25 min a pé ou metrô (Westminster/Embankment).",
+          "🎽 Retirada do KIT (bib): Saucony Store, 4 James St, Covent Garden WC2E 8BH — Qua8–Sex10 12h–19h, Sáb11 10h–17h30. Levar foto + QR code. ⚠️ Melhor janela: sexta 10/07 fim de tarde (volta de Greenwich) — bib só é retirado presencialmente.",
+          "Dia da partida: corra leve, sem mala (checkout com guarda-volumes no hotel). Vai estar quente — protetor solar; água nos km 4,2 e 7,2."] },
       { name: "Borough Market", type: "mercado", coords: [51.5055, -0.0909], area: "London Bridge",
         price: "Dom 10h–16h", desc: ["Último almoço/brunch de despedida: um dos melhores mercados de comida do mundo.", "Pão artesanal, queijos, comidas do mundo — tudo acessível. A ~10 min do hotel."] },
       { name: "Tate Modern", type: "museu", coords: [51.5076, -0.0994], area: "South Bank",
@@ -365,7 +380,7 @@ const DAYS = [
       { name: "Heathrow Airport", type: "transporte", coords: [51.4700, -0.4543], area: "Londres",
         desc: ["Partida à noite — chegue com 3h de antecedência.", "Linha Piccadilly direto do centro (~1h, ~£6)."] }
     ],
-    tips: ["Dia leve de propósito: Camden + Bandai + Shard já foram no domingo 5.", "Borough Market abre domingo (10h–16h) — perfeito para o último almoço.", "Noite: Heathrow com 3h de antecedência."]
+    tips: ["🏃 Acordar 6h30 — a London 10K (9h30) substitui o longo do plano. Sair do hotel ~7h30, leve/race-ready.", "🎽 Bib deve ter sido retirado antes (ideal: sexta 10 na volta de Greenwich).", "Borough Market abre domingo (10h–16h) — último almoço após a prova.", "Noite: Heathrow com 3h de antecedência."]
   }
 ];
 
