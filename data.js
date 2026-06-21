@@ -130,7 +130,7 @@ const DAYS = [
   {
     id: 3, date: "5 jul", weekday: "Domingo", city: "Londres", emoji: "🤖",
     title: "Camden + Colecionáveis + The Shard",
-    summary: "Camden Market e Bandai de manhã, Plataforma 9¾ a caminho, The Shard ao pôr do sol.",
+    summary: "🏃 Acordar 7h30 (recuperação ativa, trote leve 25–30 min) → Camden Market e Bandai de manhã, Plataforma 9¾, The Shard ao pôr do sol.",
     places: [
       { name: "Camden Market", type: "mercado", coords: [51.5417, -0.1463], area: "Camden Town (Northern Line)",
         desc: ["🆕 Museus de South Kensington saíram do domingo (lotado) para a segunda — domingo virou mercado + colecionáveis.",
@@ -155,7 +155,7 @@ const DAYS = [
   {
     id: 4, date: "6 jul", weekday: "Segunda", city: "Londres", emoji: "👑",
     title: "Troca da Guarda + Museus de Ciência e Natureza",
-    summary: "Troca da Guarda às 11h, depois Natural History e Science Museum (dia útil = menos cheio).",
+    summary: "🏃 Acordar 6h00 (corrida 9 km leve + força) → Troca da Guarda às 11h, depois Natural History e Science Museum.",
     places: [
       { name: "Buckingham Palace — Troca da Guarda", type: "atracao", coords: [51.5014, -0.1419], area: "St James's",
         price: "Gratuito", desc: ["👑 Cerimônia às 11h (~45 min). Cheguem ~10h15 para um bom lugar (grades, Victoria Memorial ou ao longo do The Mall).",
@@ -245,7 +245,7 @@ const DAYS = [
   {
     id: 6, date: "8 jul", weekday: "Quarta", city: "Paris", emoji: "🗼",
     title: "Torre Eiffel + Arco do Triunfo + Montmartre",
-    summary: "Invalides e Rodin por fora, Torre Eiffel às 10h, Arco do Triunfo e Montmartre ao pôr do sol.",
+    summary: "🏃 Acordar 6h30 (corrida leve no Sena) → Invalides e Rodin por fora, Torre Eiffel às 10h, Arco do Triunfo e Montmartre ao pôr do sol.",
     places: [
       { name: "Musée Rodin", type: "museu", coords: [48.8553, 2.3158], area: "Paris 7e",
         price: "Só jardim ~€5 (grátis < 18) — ou ver por fora", desc: ["Só por fora: dá para ver 'O Pensador' e o jardim pela grade.", "Do hotel (L12): direto até Solférino (sem troca) → ~10 min a pé."] },
@@ -272,7 +272,7 @@ const DAYS = [
   {
     id: 7, date: "9 jul", weekday: "Quinta", city: "Paris", emoji: "🖼️",
     title: "Museu do Louvre → Retorno a Londres",
-    summary: "Louvre às 10h30 (manhã), almoço rápido perto do centro, Eurostar de volta 16h12 (chegada Londres ~17h27).",
+    summary: "🏃 Acordar 6h15 (CCL 8 km leve, opcional) → Louvre às 10h30, almoço rápido, Eurostar de volta 16h12 (chegada Londres ~17h27).",
     places: [
       { name: "Museu do Louvre", type: "museu", coords: [48.8606, 2.3376], area: "Paris 1er",
         price: "~€22 adulto / grátis < 18 — ✅ INGRESSO COMPRADO: 10h30, 9/jul", desc: ["Checkout no hotel de manhã; mochilas no vestiaire gratuito do Louvre.",
