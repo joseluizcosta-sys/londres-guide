@@ -197,7 +197,7 @@ const DAYS = [
   {
     id: 5, date: "7 jul", weekday: "Terça", city: "Paris", emoji: "🚄",
     title: "Eurostar → Paris | Saint-Germain + Tuileries",
-    summary: "Eurostar 10h30 (chegada ~13h45), tarde em Saint-Germain (Les Deux Magots, Au Plat d'Étain, Jardin du Luxembourg, Notre-Dame), jantar no Bouillon Chartier, noite na Fête des Tuileries.",
+    summary: "Eurostar 10h30 (chegada ~13h45), tarde em Saint-Germain (Les Deux Magots, Au Plat d'Étain, Jardin du Luxembourg, Notre-Dame) + Invalides e Rodin por fora (Solférino, L12 direto), jantar no Bouillon Chartier, noite na Fête des Tuileries.",
     places: [
       { name: "London St Pancras International", type: "transporte", coords: [51.5320, -0.1263], area: "Londres",
         desc: ["✅ Eurostar comprado: partida 10h30 (7/jul) — ~2h15 até Paris Gare du Nord, chegada ~13h45 (1h de fuso a mais).",
@@ -225,6 +225,10 @@ const DAYS = [
         desc: ["Livraria mais famosa do mundo, à beira do Sena.", "Livros novos e usados, gatos que moram na loja, história literária rica."] },
       { name: "Grande Mosquée de Paris", type: "atracao", coords: [48.8420, 2.3550], area: "Quartier Latin (5e)",
         desc: ["⚠️ Opcional — só se sobrar tempo (a tarde fica curta com chegada às 13h45).", "Passar por fora, ~15 min a pé a sudeste. Arquitetura hispano-mourisca: azulejos, minarete de 33 m, pátios de inspiração da Alhambra.", "💡 Barato: salão de chá com chá de menta + doces árabes."] },
+      { name: "Musée Rodin", type: "museu", coords: [48.8553, 2.3158], area: "Paris 7e",
+        price: "Só jardim ~€5 (grátis < 18) — ou ver por fora", desc: ["🆕 Migrou da quarta para cá (a quarta de manhã virou banho na Seine).", "Só por fora: dá para ver 'O Pensador' e o jardim pela grade.", "Do Saint-Germain/Luxembourg: ~15 min a pé a oeste, ou L12 de Rennes/hotel direto a Solférino → ~10 min a pé."] },
+      { name: "Les Invalides", type: "atracao", coords: [48.8566, 2.3126], area: "Paris 7e",
+        desc: ["🆕 Migrou da quarta para cá. Por fora: o domo dourado (Túmulo de Napoleão) é uma das silhuetas mais bonitas de Paris.", "Coladinho ao Rodin; a esplanada já vale a passada. Boa luz de fim de tarde para fotos."] },
       { name: "Quatorze Running (loja de corrida)", type: "loja", coords: [48.8398, 2.3216], area: "14 rue de l'Ouest, 14e (Montparnasse)",
         price: "Ter–Sáb 10h30–19h30", desc: ["🏃 Substitui a Run and Become de Londres: loja especializada em corrida e trail, atendimento técnico.",
           "Marcas: Hoka, Asics, Brooks, Saucony, On, Altra; relógios GPS e nutrição.",
@@ -238,19 +242,17 @@ const DAYS = [
         price: "Entrada grátis (paga só os brinquedos)", desc: ["Parque de diversões de verão (20/jun–23/ago 2026, todos os dias 11h–23h30).", "A 'noite mágica' do filho: roda-gigante com vista de Paris ao entardecer.", "Escurece ~21h30 no verão — dá tempo de jantar e curtir a roda iluminada.", "💡 Quem quiser jantar de street food no parque pode pular o Bouillon Chartier."] }
     ],
     tips: ["🏃 Treino: DESCANSO (a corrida de 9 km passou para segunda). Dia de viagem — Eurostar 10h30, chegue tranquilo a St Pancras (~9h30).",
-      "A L12 conecta o hotel direto a Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre).", "Volta ao hotel à noite: de Concorde, L12 direto.", "Tarde enxuta (chegada 13h45): priorize Les Deux Magots + Au Plat d'Étain (fecha 17h) + Luxembourg; Mosquée fica como opcional."]
+      "A L12 conecta o hotel direto a Concorde (Tuileries), Solférino (Rodin) e Abbesses/Pigalle (Montmartre).", "Volta ao hotel à noite: de Concorde, L12 direto.", "Tarde enxuta (chegada 13h45): priorize Les Deux Magots + Au Plat d'Étain (fecha 17h) + Luxembourg; Invalides/Rodin por fora no fim de tarde (sem horário); Mosquée fica como opcional.", "🆕 Invalides + Rodin migraram da quarta para cá — a quarta de manhã agora é banho na Seine (Bras de Grenelle)."]
   },
 
   /* ---------------------- DIA 6 ---------------------- */
   {
     id: 6, date: "8 jul", weekday: "Quarta", city: "Paris", emoji: "🗼",
     title: "Torre Eiffel + Arco do Triunfo + Montmartre",
-    summary: "🏃 Acordar 6h30 (corrida leve no Sena) → Invalides e Rodin por fora, Torre Eiffel às 10h, Arco do Triunfo e Montmartre ao pôr do sol.",
+    summary: "🏊 Banho na Seine às 8h (Bras de Grenelle, 15e) → caminhada ribeirinha até a Torre Eiffel às 10h, Arco do Triunfo e Montmartre ao pôr do sol.",
     places: [
-      { name: "Musée Rodin", type: "museu", coords: [48.8553, 2.3158], area: "Paris 7e",
-        price: "Só jardim ~€5 (grátis < 18) — ou ver por fora", desc: ["Só por fora: dá para ver 'O Pensador' e o jardim pela grade.", "Do hotel (L12): direto até Solférino (sem troca) → ~10 min a pé."] },
-      { name: "Les Invalides", type: "atracao", coords: [48.8566, 2.3126], area: "Paris 7e",
-        desc: ["Por fora: o domo dourado (Túmulo de Napoleão) é uma das silhuetas mais bonitas de Paris.", "Coladinho ao Rodin; a esplanada já vale a passada."] },
+      { name: "Banho na Seine — Bras de Grenelle", type: "parque", coords: [48.8512, 2.2790], area: "Pont de Grenelle (15e)",
+        price: "Gratuito · 8h–18h (4 jul–30 ago 2026)", desc: ["🆕 Um dos 3 pontos oficiais de banho na Seine, em frente à réplica da Estátua da Liberdade (Île aux Cygnes).", "🕗 Cheguem às 8h na abertura — saiam do banho até ~9h15 para não apertar a Torre 10h. Do hotel (Vaugirard/15e): pertinho, ~10 min de metrô/RER ou táxi.", "Gratuito e com salva-vidas; vestiário + chuveiro no local (trocam ali, não voltam molhados). Levem toalha, chinelo e sacola impermeável; pertences ao mínimo (sem guarda-volumes confiável).", "⚠️ Pode fechar sem aviso se chover forte ou a corrente subir — tenham plano B. Água ~20–22°C (gelada p/ padrão BR); controle de profundidade/idade para o filho — confira a sinalização.", "Depois: ~15–20 min a pé pela beira do rio (via Île aux Cygnes) direto à Torre Eiffel."] },
       { name: "Torre Eiffel", type: "atracao", coords: [48.8584, 2.2945], area: "Paris 7e",
         price: "✅ INGRESSO COMPRADO — 10h, 8/jul · 2º andar ~€19/€9,50 · topo ~€28/€14", desc: ["Cheguem ~9h40 para a revista de segurança (mochila passa por revista — venham leves).", "Reservem 2–3h, sem pressa — o dia está folgado.", "⚠️ Vidro e álcool proibidos dentro da Torre (no gramado do Champ de Mars, tudo certo)."] },
       { name: "Champ de Mars", type: "parque", coords: [48.8556, 2.2986], area: "Paris 7e",
@@ -264,7 +266,8 @@ const DAYS = [
       { name: "Espace Dalí", type: "museu", coords: [48.8862, 2.3389], area: "Montmartre",
         desc: "Opcional indoor: esculturas surreais e relógios derretendo — a melhor parada de Montmartre para criança." }
     ],
-    tips: ["🏃 Treino: o plano marca natação? — sem piscina, troque por corrida leve. Acordar 6h30, ~35 min pela beira do Sena / Champ de Mars, antes da Torre às 10h.",
+    tips: ["🏊 Treino de hoje = o próprio banho na Seine (Bras de Grenelle, 8h). Quem quiser ainda corre 7h–7h40 pela beira do rio antes.",
+      "🕗 Banho 8h–9h15 → caminhada ribeirinha → Torre 10h (cheguem 9h40 p/ revista). Se o banho fechar/atrasar, plano B: passar no Rodin/Invalides por fora a caminho da Torre.",
       "Volta ao hotel: de Montmartre, L12 (Abbesses/Pigalle) direto.", "Jantar em Abbesses (bons bistrôs) ou de volta ao centro."]
   },
 
