@@ -249,14 +249,14 @@ const DAYS = [
   {
     id: 6, date: "8 jul", weekday: "Quarta", city: "Paris", emoji: "🗼",
     title: "Torre Eiffel + Arco do Triunfo + Montmartre",
-    summary: "🏊 Banho na Seine às 8h (Bras de Grenelle, 15e) → caminhada ribeirinha até a Torre Eiffel às 10h, Arco do Triunfo e Montmartre ao pôr do sol.",
+    summary: "🗼 Torre Eiffel às 10h → piquenique no Champ de Mars → 🏊 mergulho solo do JC na Seine (Bras de Grenelle, ~13h) → Arco do Triunfo e Montmartre ao pôr do sol.",
     places: [
-      { name: "Banho na Seine — Bras de Grenelle", type: "parque", coords: [48.8512, 2.2790], area: "Pont de Grenelle (15e)",
-        price: "Gratuito · 8h–18h (4 jul–30 ago 2026)", desc: ["🆕 Um dos 3 pontos oficiais de banho na Seine, em frente à réplica da Estátua da Liberdade (Île aux Cygnes).", "🕗 Cheguem às 8h na abertura — saiam do banho até ~9h15 para não apertar a Torre 10h. Do hotel (Vaugirard/15e): pertinho, ~10 min de metrô/RER ou táxi.", "Gratuito e com salva-vidas; vestiário + chuveiro no local (trocam ali, não voltam molhados). Levem toalha, chinelo e sacola impermeável; pertences ao mínimo (sem guarda-volumes confiável).", "⚠️ Pode fechar sem aviso se chover forte ou a corrente subir — tenham plano B. Água ~20–22°C (gelada p/ padrão BR); controle de profundidade/idade para o filho — confira a sinalização.", "Depois: ~15–20 min a pé pela beira do rio (via Île aux Cygnes) direto à Torre Eiffel."] },
       { name: "Torre Eiffel", type: "atracao", coords: [48.8584, 2.2945], area: "Paris 7e",
         price: "✅ INGRESSO COMPRADO — 10h, 8/jul · 2º andar ~€19/€9,50 · topo ~€28/€14", desc: ["Cheguem ~9h40 para a revista de segurança (mochila passa por revista — venham leves).", "Reservem 2–3h, sem pressa — o dia está folgado.", "⚠️ Vidro e álcool proibidos dentro da Torre (no gramado do Champ de Mars, tudo certo)."] },
       { name: "Champ de Mars", type: "parque", coords: [48.8556, 2.2986], area: "Paris 7e",
-        desc: ["Almoço: piquenique clássico na grama em frente à Torre.", "Baguete + queijo + frutas de boulangerie próxima."] },
+        desc: ["Almoço: piquenique clássico na grama em frente à Torre.", "Baguete + queijo + frutas de boulangerie próxima.", "🏊 Daqui o JC escapa ~45 min para o mergulho na Seine (a ~10 min a pé); esposa e filho descansam aqui ou na Île aux Cygnes."] },
+      { name: "Mergulho na Seine — Bras de Grenelle (solo JC)", type: "parque", coords: [48.8512, 2.2790], area: "Pont de Grenelle (15e)",
+        price: "Gratuito · sem reserva · 10h–17h30 (sáb 16h45) · 4 jul–30 ago 2026", desc: ["🏊 Programa SOLO do JC (zona de banho proibida p/ menores de 14 anos / 1m40 — por isso esposa e filho não entram).", "🕐 Encaixe ideal: ~13h, depois da Torre/piquenique. A ~10 min a pé do Champ de Mars, em frente à réplica da Estátua da Liberdade (Île aux Cygnes).", "Grátis e por ordem de chegada (sem booking). Boia obrigatória emprestada no local; entrada na água supervisionada por salva-vidas. Nível mínimo de natação exigido.", "Vestiário e chuveiro no local — leve sunga, toalha e chinelo; pertences ao mínimo (sem guarda-volumes confiável).", "⚠️ Pode fechar sem aviso se chover forte ou a corrente subir. Água ~20–22°C (gelada p/ padrão BR). Depois, volta ~10 min ao grupo p/ seguir ao Arco."] },
       { name: "Arco do Triunfo", type: "atracao", coords: [48.8738, 2.2950], area: "Place Charles de Gaulle–Étoile",
         desc: ["Só por fora (vocês já têm a vista do alto da Eiffel): arquitetura imperial, relevos e o Túmulo do Soldado Desconhecido (chama reacesa 18h30).", "⚠️ Use a passagem subterrânea — nunca atravesse a rotatória.", "Do Champ de Mars: suba ao Trocadéro (foto clássica da Eiffel) e desça os Champs-Élysées."] },
       { name: "Basilique du Sacré-Cœur", type: "igreja", coords: [48.8867, 2.3431], area: "Montmartre",
@@ -266,8 +266,9 @@ const DAYS = [
       { name: "Espace Dalí", type: "museu", coords: [48.8862, 2.3389], area: "Montmartre",
         desc: "Opcional indoor: esculturas surreais e relógios derretendo — a melhor parada de Montmartre para criança." }
     ],
-    tips: ["🏊 Treino de hoje = o próprio banho na Seine (Bras de Grenelle, 8h). Quem quiser ainda corre 7h–7h40 pela beira do rio antes.",
-      "🕗 Banho 8h–9h15 → caminhada ribeirinha → Torre 10h (cheguem 9h40 p/ revista). Se o banho fechar/atrasar, plano B: passar no Rodin/Invalides por fora a caminho da Torre.",
+    tips: ["🏊 Mergulho do JC é SOLO e na tarde (Grenelle só abre 10h, bate com a Torre — não dá de manhã). Encaixa ~13h, depois do piquenique, sem tirar o grupo do roteiro.",
+      "🕐 Sequência: Torre 10h → Champ de Mars (almoço) → JC escapa p/ o mergulho (~45 min) → reagrupa → Arco/Champs-Élysées → Montmartre.",
+      "Invalides + Rodin (por fora) ficam na terça à tarde, como combinado.",
       "Volta ao hotel: de Montmartre, L12 (Abbesses/Pigalle) direto.", "Jantar em Abbesses (bons bistrôs) ou de volta ao centro."]
   },
 
